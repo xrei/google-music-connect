@@ -11,7 +11,7 @@
   },
   "overrides": [
     {
-      "files": ["**/*.ts?(x)"],
+      "files": ["**/*.ts?(x)"]
     }
   ]
 }
