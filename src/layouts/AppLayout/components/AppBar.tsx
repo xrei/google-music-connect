@@ -16,7 +16,11 @@ const useStyles = makeStyles((theme: Theme) => createStyles({
   }
 }))
 
-export const AppBar: React.FC = () => {
+type Props = {
+  title: string
+}
+
+export const AppBar: React.FC<Props> = ({title}) => {
   const classes = useStyles()
 
   return (
@@ -35,7 +39,7 @@ export const AppBar: React.FC = () => {
           <Typography className={classes.title}
             variant="h6" noWrap
           >
-            Kek
+            {title}
           </Typography>
           <div className={classes.grow}></div>
           <IconButton edge="end"

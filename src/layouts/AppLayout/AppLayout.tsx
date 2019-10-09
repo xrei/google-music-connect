@@ -3,11 +3,15 @@ import styled from 'styled-components'
 import {AppBar} from './components/AppBar'
 import {SideMenu} from './components/SideMenu'
 
-export const AppLayout: React.FC = ({children}) => {
+type Props = {
+  children: React.ReactNode,
+  title: string
+}
 
+export const AppLayout: React.FC<Props> = ({children, title}) => {
   return (
     <Layout>
-      <AppBar/>
+      <AppBar title={title}/>
       <SideMenu />
       <Content>
         {children}
