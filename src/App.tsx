@@ -6,14 +6,14 @@ import {AppLayout} from './layouts/AppLayout'
 
 const appRoutes = Object.values(Routes.app)
 
-
-export const App: React.FC = () => {
+export const App: React.FC = (props) => {
+  console.log(props)
   return (
     <AppLayout>
       <Route path={Routes.root.path} exact component={Home} />
       {
-        appRoutes.map(({path, view}) => (
-          <Route  path={path} component={view} />
+        appRoutes.map(({path, view}, i) => (
+          <Route key={i}  path={path} component={view} />
         ))
       }
     </AppLayout>
