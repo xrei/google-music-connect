@@ -4,9 +4,11 @@ import {makeStyles, List, ListItem, ListItemIcon, ListItemText, Divider} from '@
 import {Home as HomeIcn, LibraryMusic as MusicIcn, Settings as SettingsIcn} from '@material-ui/icons'
 import {toggle as ToggleDrawer} from './SideMenuStore'
 
+const DrawerWidth = 250
+
 const styles = makeStyles({
   list: {
-    width: 250
+    width: DrawerWidth
   },
   active: {
     color: '#ff0557'
