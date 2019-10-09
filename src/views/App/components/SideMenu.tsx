@@ -1,11 +1,8 @@
 import React from 'react'
-import {SwipeableDrawer, makeStyles} from '@material-ui/core'
+import {SwipeableDrawer} from '@material-ui/core'
 import {$drawer, onClose, onOpen} from './SideMenuStore'
 import {useStore} from 'effector-react'
-
-const listStyle = {
-  width: '250px'
-}
+import {MenuList} from './MenuList'
 
 export const SideMenu: React.FC = () => {
   return (
@@ -14,7 +11,7 @@ export const SideMenu: React.FC = () => {
       onClose={() => onClose()}
       onOpen={() => onOpen()}
     >
-      <div style={listStyle}>asd</div>
+      <MenuList></MenuList>
     </SwipeableDrawer>
   )
 }
