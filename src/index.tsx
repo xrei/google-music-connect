@@ -4,7 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import './index.css'
 import { StylesProvider, ThemeProvider } from '@material-ui/styles'
 import theme from './theme'
-import { App } from './views'
+import {App} from './App'
 import * as serviceWorker from './serviceWorker'
 
 ReactDOM.render(

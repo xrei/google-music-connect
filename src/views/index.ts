@@ -1,1 +1,1 @@
-export { App } from './App/App'
+export const k = () => 1

@@ -20,8 +20,8 @@ export const AppBar: React.FC = () => {
   const classes = useStyles()
 
   return (
-    <div className={classes.grow}>
-      <MuiAppBar position="static">
+    <div>
+      <MuiAppBar position="static" className={classes.grow}>
         <Toolbar>
           <IconButton
             edge="start"
