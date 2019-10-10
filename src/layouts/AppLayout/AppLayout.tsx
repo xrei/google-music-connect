@@ -26,11 +26,11 @@ export const AppLayout: React.FC<Props> = ({children, title}) => {
 
 const Layout = styled.div`
   display: flex;
-  width: 100%;
-  height: 100%;
 `
 const Content = styled.main`
+  display: flex;
   flex-grow: 1;
+  height: 100vh;
 `
 const ContentWrap = styled(Container)`
   margin-top: 60px;
