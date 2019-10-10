@@ -20,6 +20,7 @@ const Container = styled.div`
   text-align: center;
   justify-content: center;
   align-items: center;
+  width: 100%;
 `
 
 const Title = styled(Typography)`
