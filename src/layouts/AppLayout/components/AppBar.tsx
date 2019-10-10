@@ -13,7 +13,7 @@ export const AppBar: React.FC<Props> = ({title}) => {
 
   return (
     <div>
-      <MuiAppBar position="static" className={classes.grow}>
+      <MuiAppBar position="fixed" className={classes.grow}>
         <Toolbar>
           <IconButton
             edge="start"

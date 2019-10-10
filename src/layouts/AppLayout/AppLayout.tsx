@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import {Container} from '@material-ui/core'
+import {Container, CssBaseline} from '@material-ui/core'
 import {AppBar} from './components/AppBar'
 import {SideMenu} from './components/SideMenu'
 
@@ -12,6 +12,7 @@ type Props = {
 export const AppLayout: React.FC<Props> = ({children, title}) => {
   return (
     <Layout>
+      <CssBaseline />
       <AppBar title={title}/>
       <SideMenu />
       <Content>
@@ -25,16 +26,14 @@ export const AppLayout: React.FC<Props> = ({children, title}) => {
 
 const Layout = styled.div`
   display: flex;
-  flex-flow: column;
   width: 100%;
-  height: 100vh;
-  background-color: #fffdf2;
-  color: #212121;
+  height: 100%;
 `
 const Content = styled.main`
   flex-grow: 1;
 `
 const ContentWrap = styled(Container)`
+  margin-top: 60px;
   padding-top: 1rem;
   padding-bottom: 1rem;
 `
