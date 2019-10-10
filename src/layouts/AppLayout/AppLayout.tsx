@@ -5,7 +5,7 @@ import {SideMenu} from './components/SideMenu'
 
 type Props = {
   children: React.ReactNode,
-  title: string
+  title: string,
 }
 
 export const AppLayout: React.FC<Props> = ({children, title}) => {

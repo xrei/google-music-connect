@@ -1,3 +1,3 @@
 export type Message = {
-  data: any
+  data: any;
 }

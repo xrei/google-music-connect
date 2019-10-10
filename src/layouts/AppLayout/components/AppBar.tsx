@@ -5,7 +5,7 @@ import {makeStyles, createStyles} from '@material-ui/styles'
 import {toggle as DrawerToggle} from './SideMenuStore'
 
 type Props = {
-  title: string
+  title: string,
 }
 
 export const AppBar: React.FC<Props> = ({title}) => {

@@ -5,7 +5,7 @@ export const TEST_IP = '192.168.0.24'
 
 type Config = {
   ip?: string,
-  port?: string
+  port?: string,
 }
 
 export const createSocket = (config: Config = {}) => {
