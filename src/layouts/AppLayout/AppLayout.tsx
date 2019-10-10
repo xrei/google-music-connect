@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import {Container} from '@material-ui/core'
 import {AppBar} from './components/AppBar'
 import {SideMenu} from './components/SideMenu'
 
@@ -14,7 +15,9 @@ export const AppLayout: React.FC<Props> = ({children, title}) => {
       <AppBar title={title}/>
       <SideMenu />
       <Content>
-        {children}
+        <ContentWrap fixed>
+          {children}
+        </ContentWrap>
       </Content>
     </Layout>
   )
@@ -30,4 +33,8 @@ const Layout = styled.div`
 `
 const Content = styled.main`
   flex-grow: 1;
+`
+const ContentWrap = styled(Container)`
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 `

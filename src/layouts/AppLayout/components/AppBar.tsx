@@ -30,9 +30,7 @@ export const AppBar: React.FC<Props> = ({title}) => {
             {title}
           </Typography>
           <div className={classes.grow}></div>
-          <IconButton edge="end"
-            color="inherit"
-          >
+          <IconButton edge="end" color="inherit">
             <SearchIcon />
           </IconButton>
         </Toolbar>
