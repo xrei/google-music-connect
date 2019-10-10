@@ -6,15 +6,6 @@ import {toggle as ToggleDrawer} from './SideMenuStore'
 
 const DrawerWidth = 250
 
-const styles = makeStyles({
-  list: {
-    width: DrawerWidth
-  },
-  active: {
-    color: '#ff0557'
-  }
-})
-
 export const MenuList: React.FC = () => {
   const classess = styles()
   return (
@@ -57,3 +48,12 @@ export const MenuList: React.FC = () => {
     </div>
   )
 }
+
+const styles = makeStyles({
+  list: {
+    width: DrawerWidth
+  },
+  active: {
+    color: '#ff0557'
+  }
+})

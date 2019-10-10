@@ -4,18 +4,6 @@ import {Menu as MenuIcon, Search as SearchIcon} from '@material-ui/icons'
 import {makeStyles, createStyles} from '@material-ui/styles'
 import {toggle as DrawerToggle} from './SideMenuStore'
 
-const useStyles = makeStyles((theme: Theme) => createStyles({
-  grow: {
-    flexGrow: 1
-  },
-  menuBtn: {
-    marginRight: theme.spacing(2)
-  },
-  title: {
-    display: 'block'
-  }
-}))
-
 type Props = {
   title: string
 }
@@ -52,3 +40,15 @@ export const AppBar: React.FC<Props> = ({title}) => {
     </div>
   )
 }
+
+const useStyles = makeStyles((theme: Theme) => createStyles({
+  grow: {
+    flexGrow: 1
+  },
+  menuBtn: {
+    marginRight: theme.spacing(2)
+  },
+  title: {
+    display: 'block'
+  }
+}))

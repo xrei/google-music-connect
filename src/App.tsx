@@ -24,4 +24,4 @@ function makeTitle(xs: RouteType[], p: string): string {
   let found = xs.find(v => v.path === p)
   if (found && found.title) return found.title
   else return Routes.root.title
-} 
+}

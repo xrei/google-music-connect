@@ -11,7 +11,7 @@ export const SideMenu: React.FC = () => {
       onClose={() => onClose()}
       onOpen={() => onOpen()}
     >
-      <MenuList></MenuList>
+      <MenuList />
     </SwipeableDrawer>
   )
 }
