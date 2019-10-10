@@ -13,7 +13,7 @@ export const App: React.FC<RouteComponentProps> = ({location}) => {
       <Route path={Routes.root.path} exact component={Home} />
       {
         appRoutes.map(({path, view}, i) => (
-          <Route key={i}  path={path} component={view} />
+          <Route key={i} path={path} component={view} />
         ))
       }
     </AppLayout>
