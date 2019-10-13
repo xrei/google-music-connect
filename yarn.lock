@@ -1117,10 +1117,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@material-ui/core@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.5.0.tgz#7e57cc40988c71b6340e3b2569b47dbac1820351"
-  integrity sha512-UHVAjU+1uDtA+OMBNBHb4RlCZOu514XeYPafNJv+GTdXBDr1SCPK7yqRE6TV1/bulxlDusTgu5Q6BAUgpmO4MA==
+"@material-ui/core@^4.5.1":
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.5.1.tgz#6f1bbb298cc2893b29169ab9398a00ca5a6ac971"
+  integrity sha512-6pyk7diT7bflf4qUpqgPCpKYqjhRHPFwsgEV2Gv71lMqwxuRygFGHE2TdZ+l5T249H66Doj2P/j6fW7yzgxTWw==
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@material-ui/styles" "^4.5.0"
@@ -1138,10 +1138,10 @@
     prop-types "^15.7.2"
     react-transition-group "^4.3.0"
 
-"@material-ui/icons@^4.4.3":
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-4.4.3.tgz#5d4346ddbb2673a1b57ebc78fd6d50bcd88711db"
-  integrity sha512-HVVvUyc/78kmaBd93LkfWyGkXMM+zOMKzUfulWXxaV/fFAZ3N0pD0oHjWUd94zrOoF3tZP9JC7EPlIpIcZSNow==
+"@material-ui/icons@^4.5.1":
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-4.5.1.tgz#6963bad139e938702ece85ca43067688018f04f8"
+  integrity sha512-YZ/BgJbXX4a0gOuKWb30mBaHaoXRqPanlePam83JQPZ/y4kl+3aW0Wv9tlR70hB5EGAkEJGW5m4ktJwMgxQAeA==
   dependencies:
     "@babel/runtime" "^7.4.4"
 
@@ -3652,10 +3652,10 @@ effector-react@^20.4.0:
   resolved "https://registry.yarnpkg.com/effector-react/-/effector-react-20.4.0.tgz#58a327cce8a0223b8e1444b72b6e3c35874bc01b"
   integrity sha512-IcjlvSEj0Pb7JEf4HJnNYx8KqpQZsy59zLlzPWmgfoDbkRP0hy9oke/JD4duSsYQxJN0WK2R40nO7ohhTK4PEg==
 
-effector@^20.3.2:
-  version "20.3.2"
-  resolved "https://registry.yarnpkg.com/effector/-/effector-20.3.2.tgz#e0f8cb6ce59506cd0b30f7a1a24190bdaa26a295"
-  integrity sha512-gDD6C/S/ER9SV7GovXG+MudubmZPBdKgK+bcMoNl7/fRrDn2C+LE9hFxJV8zaUvd+EXuHGYW+nx667n2+uhu+g==
+effector@^20.4.0:
+  version "20.4.0"
+  resolved "https://registry.yarnpkg.com/effector/-/effector-20.4.0.tgz#01d56f6ab2a0f27511df58fd5c4d7c9a5fc22632"
+  integrity sha512-jf9I7EahX04O7AifdN8IBmN2hbH1PI+LsCWJOijwwheeFgq07MJLqCwijO2mgAlYK6858D2i19fseAyshcGrQw==
   dependencies:
     symbol-observable "^1.2.0"
 

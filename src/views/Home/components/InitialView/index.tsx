@@ -5,7 +5,7 @@ import {Typography, Button} from '@material-ui/core'
 export const InitialView: React.FC = () => {
   return (
     <Container>
-      <Title variant="h3">Welcome</Title>
+      <Title variant="h3" component="h1">Welcome</Title>
       <SubTitle>
         It seems you don't have any connected devices. Please connect to such device in first place to use app.
       </SubTitle>

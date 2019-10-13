@@ -16,5 +16,9 @@ export default {
       title: 'Settings',
       view: Settings
     }
+  },
+  setup: {
+    path: '/setup',
+    title: 'Setup'
   }
 }
