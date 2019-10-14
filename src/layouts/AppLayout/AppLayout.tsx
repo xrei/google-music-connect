@@ -33,8 +33,9 @@ const Content = styled.main`
   height: 100vh;
 `
 const ContentWrap = styled(Container)`
-  margin-top: 60px;
-  padding: 0;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  margin-top: 64px;
+  padding: 0 8px;
+  @media (max-width: 600px) {
+    margin-top: 60px;
+  }
 `

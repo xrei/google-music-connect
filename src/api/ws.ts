@@ -1,4 +1,4 @@
-import {onMessage, onOpen, onClose, onError} from './events'
+import {onMessage, onError, onConnOpen, onConnClose} from './'
 
 export const PORT = '5672'
 export const TEST_IP = '192.168.0.24'
@@ -8,11 +8,11 @@ type Config = {
   port?: string,
 }
 
-export const createSocket = (config: Config = {}) => {
+export const createSocket = (config: Config = {}): WebSocket => {
   let socket = new WebSocket(`ws://${config.ip || TEST_IP}:${config.port || PORT}`)
-  socket.onopen = onOpen
+  socket.onopen = onConnOpen
   socket.onmessage = onMessage
-  socket.onclose = onClose
+  socket.onclose = onConnClose
   socket.onerror = onError
   return socket
 }
