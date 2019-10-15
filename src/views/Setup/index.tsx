@@ -10,7 +10,7 @@ import {
   $ip, $ipCorrect, $name, $nameCorrect,
   mountFormEvt, unmountFormEvt, submitFormEvt,
   IPChangeEvt, nameChangeEvt, $isSubmitEnabled,
-  $modal, hideAuthCodeModal, finishSetup
+  $modal, hideAuthCodeModal, finishSetup, $isConnecting
 } from './model'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 export const Setup: React.FC = () => {
   React.useEffect(() => {
     mountFormEvt()
-    return unmountFormEvt as any
+    return unmountFormEvt as unknown as void
   })
 
   return (
@@ -93,6 +93,7 @@ const NewDeviceForm: React.FC = () => {
   }
 
   const isSubmitEnabled = useStore($isSubmitEnabled)
+  const loading = useStore($isConnecting)
 
   return (
     <Paper square className={cls.paper}>
@@ -104,7 +105,7 @@ const NewDeviceForm: React.FC = () => {
           variant="contained" color="secondary"
           onClick={handleSubmit}
         >Setup new device</Button>
-        {/* {loading && <CircularProgress className={cls.btnProgress} size={24} />} */}
+        {loading && <CircularProgress className={cls.btnProgress} size={24} />}
       </div>
     </Paper>
   )

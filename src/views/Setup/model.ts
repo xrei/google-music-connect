@@ -8,7 +8,7 @@ export const IPChangeEvt = createEvent<any>()
 export const nameChangeEvt = createEvent<any>()
 export const submitFormEvt = createEvent()
 export const mountFormEvt = createEvent()
-export const unmountFormEvt = createEvent()
+export const unmountFormEvt = createEvent<void>()
 export const hideAuthCodeModal = createEvent<any>()
 const showAuthCodeModal = createEvent()
 
@@ -30,9 +30,10 @@ export const $form = createStoreObject({
 const $isFormValid = combine(
   $ipCorrect,
   $nameCorrect,
-  (ip, name) => ip && name
+  (a, b) => a && b
 )
 
+export const $isConnecting = createConnection.pending
 export const $isSubmitEnabled = combine(
   $isFormValid,
   createConnection.pending,
