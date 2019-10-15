@@ -1,11 +1,16 @@
 import React from 'react'
-import {useHistory} from 'react-router'
+// import {useHistory} from 'react-router'
 import styled from 'styled-components'
 import {Theme, Typography, Button, Paper, makeStyles, TextField,
   Dialog, DialogTitle, DialogContent, DialogActions,
   CircularProgress
 } from '@material-ui/core'
-import {createConnection} from 'api/'
+import {useStore} from 'effector-react'
+import {
+  $ip, $ipCorrect, $name, $nameCorrect, $isFormValid,
+  mountFormEvt, unmountFormEvt, submitFormEvt,
+  IPChangeEvt, nameChangeEvt, $isSubmitEnabled
+} from './model'
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
@@ -31,41 +36,17 @@ const useStyles = makeStyles((theme: Theme) => ({
   }
 }))
 
-type State = {
-  ip: string,
-  name: string,
-}
 
 export const Setup: React.FC = () => {
-  const history = useHistory()
-  const cls = useStyles()
-  
-  const [loading, setLoading] = React.useState(false)
-  const [data, setData] = React.useState<State>({
-    ip: '',
-    name: ''
+  React.useEffect(() => {
+    mountFormEvt()
+    return unmountFormEvt as any
   })
-  const [open, setOpen] = React.useState(false)
 
-  const handleSubmitButton = async (): Promise<void> => {
-    setLoading(true)
-    try {
-      await createConnection(data)
-      setLoading(false)
-      setOpen(true)
-    } catch (err) {
-      setLoading(false)
-      console.log(err)
-    }
-  }
+  const [open, setOpen] = React.useState(false)
 
   const handleClose = (e: React.SyntheticEvent): void => {
     setOpen(false)
-  }
-
-  const handleChange = (name: keyof State) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setData({...data, [name]: e.target.value})
   }
 
   return (
@@ -74,36 +55,7 @@ export const Setup: React.FC = () => {
       <SubTitle>
         It seems you don't have any connected devices. Please connect to such device in first place to use app.
       </SubTitle>
-      <Paper square className={cls.paper}>
-        <TextField
-          className={cls.textField}
-          id="deviceIp"
-          label="IP address"
-          placeholder="192.168.0.0"
-          value={data.ip}
-          helperText="Device/PC local ip address from your local network"
-          required
-          onChange={handleChange('ip')}
-        />
-        <TextField
-          className={cls.textField}
-          fullWidth
-          id="deviceName"
-          label="Name"
-          value={data.name}
-          helperText="Enter name of your device"
-          required
-          onChange={handleChange('name')}
-        />
-        <div className={cls.wrapper}>
-          <Button
-            disabled={loading}
-            variant="contained" color="secondary"
-            onClick={handleSubmitButton}
-          >Setup new device</Button>
-          {loading && <CircularProgress className={cls.btnProgress} size={24} />}
-        </div>
-      </Paper>
+      <NewDeviceForm />
       <Dialog
         open={open}
       >
@@ -117,6 +69,68 @@ export const Setup: React.FC = () => {
         </DialogActions>
       </Dialog>
     </Container>
+  )
+}
+
+const NewDeviceForm: React.FC = () => {
+  const cls = useStyles()
+
+  const handleSubmit = (e: React.SyntheticEvent): void => {
+    e.preventDefault()
+    submitFormEvt()
+  }
+
+  const isFormValid = useStore($isFormValid)
+  const isSubmitEnabled = useStore($isSubmitEnabled)
+
+  return (
+    <Paper square className={cls.paper}>
+      <IpInput className={cls.textField} />
+      <NameInput className={cls.textField} />
+      <div className={cls.wrapper}>
+        <Button
+          disabled={!isSubmitEnabled}
+          variant="contained" color="secondary"
+          onClick={handleSubmit}
+        >Setup new device</Button>
+        {/* {loading && <CircularProgress className={cls.btnProgress} size={24} />} */}
+      </div>
+    </Paper>
+  )
+}
+
+const IpInput: React.FC<{className: string}> = ({className}) => {
+  const ip = useStore($ip)
+  const ipErr = !useStore($ipCorrect)
+  return (
+    <TextField
+      className={className}
+      id="deviceIp"
+      label="IP address"
+      placeholder="192.168.0.0"
+      value={ip}
+      helperText="Device/PC local ip address from your local network"
+      required
+      onChange={IPChangeEvt}
+      error={ipErr}
+    />
+  )
+}
+const NameInput: React.FC<{className: string}> = ({className}) => {
+  const name = useStore($name)
+  const nameErr = !useStore($nameCorrect)
+  return (
+    <TextField
+      className={className}
+      fullWidth
+      id="deviceName"
+      label="Name"
+      value={name}
+      helperText="Enter name of your device"
+      required
+      onChange={nameChangeEvt}
+      error={nameErr}
+    />
   )
 }
 

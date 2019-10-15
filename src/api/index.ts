@@ -11,6 +11,7 @@ export const onError = createEvent<Event>('onError')
 
 export const wsDomain = createDomain('ws')
 export const createConnection = wsDomain.effect<Config, WebSocket, Error>()
+
 createConnection.use(async (params) => {
   await sleep(1000)
   const ws = await createSocket(params)
