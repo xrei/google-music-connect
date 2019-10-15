@@ -1,18 +1,15 @@
-import {onMessage, onError, onConnOpen, onConnClose} from './'
-
 export const PORT = '5672'
 export const TEST_IP = '192.168.0.24'
 
-type Config = {
+export type Config = {
   ip?: string,
   port?: string,
 }
 
-export const createSocket = (config: Config = {}): WebSocket => {
-  let socket = new WebSocket(`ws://${config.ip || TEST_IP}:${config.port || PORT}`)
-  socket.onopen = onConnOpen
-  socket.onmessage = onMessage
-  socket.onclose = onConnClose
-  socket.onerror = onError
-  return socket
+export const createSocket = (config: Config = {}): Promise<WebSocket> => {
+  return new Promise((resolve, reject) => {
+    let socket = new WebSocket(`ws://${config.ip || TEST_IP}:${config.port || PORT}`)
+    socket.onopen = () => resolve(socket)
+    socket.onerror = (err) => reject(err)
+  })
 }

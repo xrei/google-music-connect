@@ -1,8 +1,11 @@
 import React from 'react'
+import {useHistory} from 'react-router'
 import styled from 'styled-components'
 import {Theme, Typography, Button, Paper, makeStyles, TextField,
-  Dialog, DialogTitle, DialogContent, DialogActions
+  Dialog, DialogTitle, DialogContent, DialogActions,
+  CircularProgress
 } from '@material-ui/core'
+import {createConnection} from 'api/'
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
@@ -15,6 +18,16 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   btn: {
     marginTop: 32
+  },
+  btnProgress: {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -12,
+    marginLeft: -12,
+  },
+  wrapper: {
+    position: 'relative'
   }
 }))
 
@@ -24,19 +37,29 @@ type State = {
 }
 
 export const Setup: React.FC = () => {
+  const history = useHistory()
   const cls = useStyles()
   
+  const [loading, setLoading] = React.useState(false)
   const [data, setData] = React.useState<State>({
     ip: '',
     name: ''
   })
   const [open, setOpen] = React.useState(false)
 
-  const handleSubmitButton = (): void => {
-    setOpen(true)
+  const handleSubmitButton = async (): Promise<void> => {
+    setLoading(true)
+    try {
+      await createConnection(data)
+      setLoading(false)
+      setOpen(true)
+    } catch (err) {
+      setLoading(false)
+      console.log(err)
+    }
   }
 
-  const handleClose = (): void => {
+  const handleClose = (e: React.SyntheticEvent): void => {
     setOpen(false)
   }
 
@@ -72,20 +95,24 @@ export const Setup: React.FC = () => {
           required
           onChange={handleChange('name')}
         />
-        <Button 
-          variant="contained" color="secondary"
-          onClick={handleSubmitButton}
-        >Setup new device</Button>
+        <div className={cls.wrapper}>
+          <Button
+            disabled={loading}
+            variant="contained" color="secondary"
+            onClick={handleSubmitButton}
+          >Setup new device</Button>
+          {loading && <CircularProgress className={cls.btnProgress} size={24} />}
+        </div>
       </Paper>
       <Dialog
         open={open}
-        onClose={handleClose}
       >
         <DialogTitle>Enter 4-digit auth code</DialogTitle>
         <DialogContent>
           <TextField type="number" required fullWidth />
         </DialogContent>
         <DialogActions>
+          <Button color="primary" onClick={handleClose}>Close</Button>
           <Button color="primary" onClick={() => {}}>Save device</Button>
         </DialogActions>
       </Dialog>
