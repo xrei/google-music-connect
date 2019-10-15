@@ -1,16 +1,20 @@
 import {createEffect, createEvent, createStore, createStoreObject, combine} from 'effector'
 import {createConnection} from 'api/'
 
+type AuthCode = string
+
+export const finishSetup = createEvent<AuthCode>()
 export const IPChangeEvt = createEvent<any>()
 export const nameChangeEvt = createEvent<any>()
 export const submitFormEvt = createEvent()
 export const mountFormEvt = createEvent()
 export const unmountFormEvt = createEvent()
+export const hideAuthCodeModal = createEvent<any>()
+const showAuthCodeModal = createEvent()
 
-// type FormData = {
-//   ip: string,
-//   name: string,
-// }
+export const $modal = createStore(false)
+$modal.on(showAuthCodeModal, () => true)
+$modal.on(hideAuthCodeModal, () => false)
 
 export const $ip = createStore<string>('')
 export const $ipCorrect = $ip.map(isValidIP)
@@ -23,7 +27,7 @@ export const $form = createStoreObject({
   name: $name
 })
 
-export const $isFormValid = combine(
+const $isFormValid = combine(
   $ipCorrect,
   $nameCorrect,
   (ip, name) => ip && name
@@ -46,6 +50,15 @@ submitFormEvt.watch(() => {
   const form = $form.getState()
   console.log(form)
   createConnection(form)
+})
+
+createConnection.done.watch(({result}) => {
+  showAuthCodeModal()
+  // result.send
+})
+
+finishSetup.watch((code) => {
+  console.log(code)
 })
 
 function isValidIP(ip: string): boolean {

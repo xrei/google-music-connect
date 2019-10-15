@@ -7,9 +7,10 @@ import {Theme, Typography, Button, Paper, makeStyles, TextField,
 } from '@material-ui/core'
 import {useStore} from 'effector-react'
 import {
-  $ip, $ipCorrect, $name, $nameCorrect, $isFormValid,
+  $ip, $ipCorrect, $name, $nameCorrect,
   mountFormEvt, unmountFormEvt, submitFormEvt,
-  IPChangeEvt, nameChangeEvt, $isSubmitEnabled
+  IPChangeEvt, nameChangeEvt, $isSubmitEnabled,
+  $modal, hideAuthCodeModal, finishSetup
 } from './model'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -43,12 +44,6 @@ export const Setup: React.FC = () => {
     return unmountFormEvt as any
   })
 
-  const [open, setOpen] = React.useState(false)
-
-  const handleClose = (e: React.SyntheticEvent): void => {
-    setOpen(false)
-  }
-
   return (
     <Container>
       <Title variant="h3" component="h1">Welcome</Title>
@@ -56,19 +51,36 @@ export const Setup: React.FC = () => {
         It seems you don't have any connected devices. Please connect to such device in first place to use app.
       </SubTitle>
       <NewDeviceForm />
-      <Dialog
-        open={open}
-      >
-        <DialogTitle>Enter 4-digit auth code</DialogTitle>
-        <DialogContent>
-          <TextField type="number" required fullWidth />
-        </DialogContent>
-        <DialogActions>
-          <Button color="primary" onClick={handleClose}>Close</Button>
-          <Button color="primary" onClick={() => {}}>Save device</Button>
-        </DialogActions>
-      </Dialog>
+      <AuthCodeModal />
     </Container>
+  )
+}
+
+const AuthCodeModal: React.FC = () => {
+  const [code, setCode] = React.useState('')
+  const open = useStore($modal)
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setCode(event.target.value)
+  }
+
+  const disabled = !(code.length === 4)
+
+  return (
+    <Dialog
+      open={open}
+    >
+      <DialogTitle>Enter 4-digit auth code</DialogTitle>
+      <DialogContent>
+        <TextField type="number" required fullWidth 
+          onChange={handleChange}
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button color="primary" onClick={hideAuthCodeModal}>Close</Button>
+        <Button disabled={disabled} onClick={() => finishSetup(code)}>Save device</Button>
+      </DialogActions>
+    </Dialog>
   )
 }
 
@@ -80,7 +92,6 @@ const NewDeviceForm: React.FC = () => {
     submitFormEvt()
   }
 
-  const isFormValid = useStore($isFormValid)
   const isSubmitEnabled = useStore($isSubmitEnabled)
 
   return (
