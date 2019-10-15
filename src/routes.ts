@@ -1,4 +1,7 @@
+import {createBrowserHistory} from 'history'
 import {Playlists, Settings} from './views'
+
+export const history = createBrowserHistory()
 
 export default {
   root: {

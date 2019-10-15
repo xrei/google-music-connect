@@ -1,5 +1,4 @@
 import React from 'react'
-// import {useHistory} from 'react-router'
 import styled from 'styled-components'
 import {Theme, Typography, Button, Paper, makeStyles, TextField,
   Dialog, DialogTitle, DialogContent, DialogActions,
@@ -46,9 +45,10 @@ export const Setup: React.FC = () => {
 
   return (
     <Container>
-      <Title variant="h3" component="h1">Welcome</Title>
+      <Title variant="h3" component="h1" color="primary">Welcome</Title>
       <SubTitle>
-        It seems you don't have any connected devices. Please connect to such device in first place to use app.
+        It seems you don't have any connected devices.<br/>Please connect to such device in first place to use app.<br/>Make sure your pc/device has running<br/>
+        <a rel="noopener noreferrer" target="_blank"  href="https://github.com/MarshallOfSound/Google-Play-Music-Desktop-Player-UNOFFICIAL-">Google Play Music Desktop</a>
       </SubTitle>
       <NewDeviceForm />
       <AuthCodeModal />
@@ -119,7 +119,7 @@ const IpInput: React.FC<{className: string}> = ({className}) => {
       className={className}
       id="deviceIp"
       label="IP address"
-      placeholder="192.168.0.0"
+      placeholder="192.168.0.x"
       value={ip}
       helperText="Device/PC local ip address from your local network"
       required
@@ -150,9 +150,6 @@ const Container = styled.div`
   display: flex;
   flex-flow: column;
   text-align: center;
-  /* justify-content: center;
-  align-items: center; */
-  /* height: 100vh; */
   max-width: 768px;
   padding: 8px;
   margin: 32px auto;

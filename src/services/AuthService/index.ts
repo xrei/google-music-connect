@@ -1,20 +1,21 @@
 import Cookies from 'js-cookie'
 
-type Device = {
+export type Device = {
   code: string,
   ip: string,
   name: string,
 }
 
 class AuthService {
-  add(deviceObj: Device): void {
-    const d = this.devices
-    Cookies.set('devices', [...d, deviceObj])
-    // console.log('cookie set')
+  add(deviceObj: Device): Promise<void> {
+    Cookies.set('devices', deviceObj)
+    return Promise.resolve()
   }
-  get devices(): Device[] | [] {
-    const d = Cookies.get('devices')
-    return d ? JSON.parse(d) : []
+  get devices(): Promise<Device> {
+    return new Promise((res, rej) => {
+      const d = Cookies.get('devices')
+      d ? res(JSON.parse(d)) : rej(Error('No saved device'))
+    })
   }
   hasDevice(): boolean {
     return Boolean(Cookies.get('devices'))

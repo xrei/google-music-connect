@@ -1,9 +1,15 @@
-import {createEffect, createEvent, createStore, createStoreObject, combine} from 'effector'
+import {
+  createEvent, createStore, createStoreObject, createEffect, combine
+} from 'effector'
 import {createConnection} from 'api/'
+import {onConnOpen} from 'api/events'
+import {toMsg} from 'api/utils'
+import AuthService, {Device} from 'services/AuthService'
+import {history} from 'routes'
 
 type AuthCode = string
 
-export const finishSetup = createEvent<AuthCode>()
+export const finishSetup = createEffect<AuthCode, Promise<void>>()
 export const IPChangeEvt = createEvent<any>()
 export const nameChangeEvt = createEvent<any>()
 export const submitFormEvt = createEvent()
@@ -55,11 +61,24 @@ submitFormEvt.watch(() => {
 
 createConnection.done.watch(({result}) => {
   showAuthCodeModal()
-  // result.send
+  result.send(toMsg({
+    namespace: 'connect',
+    method: 'connect'
+  }))
 })
 
-finishSetup.watch((code) => {
-  console.log(code)
+finishSetup.use(async (code) => {
+  let cfg: Device = {
+    code,
+    ...$form.getState()
+  }
+  return AuthService.add(cfg)
+})
+finishSetup.done.watch(() => {
+  onConnOpen()
+})
+finishSetup.finally.watch(() => {
+  history.push('/')
 })
 
 function isValidIP(ip: string): boolean {

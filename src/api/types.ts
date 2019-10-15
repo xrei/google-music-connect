@@ -1,3 +1,5 @@
 export type Message = {
-  data: any,
+  namespace: string,
+  method: string,
+  arguments?: string[] | number[],
 }

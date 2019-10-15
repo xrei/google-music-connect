@@ -1,9 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {Router} from 'react-router'
+import {Route} from 'react-router-dom'
 import {StylesProvider, ThemeProvider} from '@material-ui/styles'
 import './index.css'
-import Routes from './routes'
+import Routes, {history} from './routes'
 import theme from './theme'
 import {App} from './App'
 import {Setup} from './views/Setup'
@@ -13,7 +14,7 @@ import * as serviceWorker from './serviceWorker'
 ReactDOM.render(
   <StylesProvider injectFirst>
     <ThemeProvider theme={theme}>
-      <Router>
+      <Router history={history}>
         <Route path={Routes.setup.path} component={Setup}/>
         <PrivateRoute
           path={Routes.root.path}

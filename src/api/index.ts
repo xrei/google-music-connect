@@ -1,15 +1,9 @@
-import {createDomain, createEvent} from 'effector'
+import {createDomain} from 'effector'
 import {createSocket, Config} from './ws'
-export const onMessage = createEvent<MessageEvent>('onMessage')
-
-onMessage.map(({data}) => data).map(JSON.parse)
-onMessage.watch(console.log)
-
-export const onConnOpen = createEvent<Event>('onConnOpen')
-export const onConnClose = createEvent<CloseEvent>('onConnClose')
-export const onError = createEvent<Event>('onError')
+import {onMessage, onConnClose, onError} from './events'
 
 export const wsDomain = createDomain('ws')
+export const $ws = wsDomain.store<WebSocket | null>(null)
 export const createConnection = wsDomain.effect<Config, WebSocket, Error>()
 
 createConnection.use(async (params) => {
@@ -18,10 +12,7 @@ createConnection.use(async (params) => {
   return ws
 })
 
-export const $ws = wsDomain.store<WebSocket | null>(null)
-
 $ws.on(createConnection.done, (_, {result: ws}) => {
-  ws.onopen = onConnOpen
   ws.onclose = onConnClose
   ws.onerror = onError
   ws.onmessage = onMessage
