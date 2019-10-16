@@ -1,16 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
-import {Theme, Typography, Button, Paper, makeStyles, TextField,
-  Dialog, DialogTitle, DialogContent, DialogActions,
+import {Theme, Typography, Button, Paper, makeStyles, TextField, 
   CircularProgress
 } from '@material-ui/core'
 import {useStore} from 'effector-react'
 import {
   $ip, $ipCorrect, $name, $nameCorrect,
   mountFormEvt, unmountFormEvt, submitFormEvt,
-  IPChangeEvt, nameChangeEvt, $isSubmitEnabled,
-  $modal, hideAuthCodeModal, finishSetup, $isConnecting
+  IPChangeEvt, nameChangeEvt, $isSubmitEnabled, $isConnecting, finishSetup
 } from './model'
+import {AuthCodeDialog} from 'components/AuthCodeDialog'
 
 const useStyles = makeStyles((theme: Theme) => ({
   paper: {
@@ -43,6 +42,10 @@ export const Setup: React.FC = () => {
     return unmountFormEvt as unknown as void
   })
 
+  const dialogClickSave = (code: string): void => {
+    finishSetup(code)
+  }
+
   return (
     <Container>
       <Title variant="h3" component="h1" color="primary">Welcome</Title>
@@ -51,38 +54,12 @@ export const Setup: React.FC = () => {
         <a rel="noopener noreferrer" target="_blank"  href="https://github.com/MarshallOfSound/Google-Play-Music-Desktop-Player-UNOFFICIAL-">Google Play Music Desktop</a>
       </SubTitle>
       <NewDeviceForm />
-      <AuthCodeModal />
+      <AuthCodeDialog onSaveClick={dialogClickSave}/>
     </Container>
   )
 }
 
-const AuthCodeModal: React.FC = () => {
-  const [code, setCode] = React.useState('')
-  const open = useStore($modal)
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setCode(event.target.value)
-  }
-
-  const disabled = !(code.length === 4)
-
-  return (
-    <Dialog
-      open={open}
-    >
-      <DialogTitle>Enter 4-digit auth code</DialogTitle>
-      <DialogContent>
-        <TextField type="number" required fullWidth 
-          onChange={handleChange}
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button color="primary" onClick={hideAuthCodeModal}>Close</Button>
-        <Button disabled={disabled} onClick={() => finishSetup(code)}>Save device</Button>
-      </DialogActions>
-    </Dialog>
-  )
-}
 
 const NewDeviceForm: React.FC = () => {
   const cls = useStyles()

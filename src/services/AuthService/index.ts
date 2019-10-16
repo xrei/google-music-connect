@@ -8,7 +8,19 @@ export type Device = {
 
 class AuthService {
   add(deviceObj: Device): Promise<void> {
-    Cookies.set('devices', deviceObj)
+    Cookies.set('devices', deviceObj, {expires: 365})
+    return Promise.resolve()
+  }
+  async addCode(code: string): Promise<void> {
+    const d = await this.devices
+    await this.add({
+      ...d,
+      code
+    })
+    console.log({
+      ...d,
+      code
+    })
     return Promise.resolve()
   }
   get devices(): Promise<Device> {

@@ -2,6 +2,7 @@ import {createEvent} from 'effector'
 import {toMsg} from './utils'
 import AuthService from 'services/AuthService'
 import {$ws} from './'
+import {showAuthCodeModal} from 'components/AuthCodeDialog/model'
 
 export const onMessage = createEvent<MessageEvent>('onMessage')
 const filteredMsg = onMessage.map(({data}) => data).map(JSON.parse)
@@ -11,6 +12,12 @@ filteredMsg.watch((data) => {
   switch (channel) {
     case 'connect': {
       console.log(payload)
+      if (payload === 'CODE_REQUIRED') {
+        showAuthCodeModal()
+      } else {
+        AuthService.addCode(payload as string)
+          .then(() => onConnOpen())
+      }
       break
     }
     default: break
@@ -18,10 +25,10 @@ filteredMsg.watch((data) => {
 })
 
 export const onConnOpen = createEvent<Event | void>('onConnOpen')
-onConnOpen.watch(() => {
+onConnOpen.watch((e) => {
+  e && console.log('socket connected on: ' + (e.target as WebSocket).url)
   AuthService.devices
     .then((v) => {
-      console.log(v)
       const ws = $ws.getState()
       ws && ws.send(toMsg({
         namespace: 'connect',
