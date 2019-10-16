@@ -4,10 +4,14 @@ import Routes from './routes'
 import {Home} from './views'
 import {AppLayout} from './layouts/AppLayout'
 import RouteType from './types/Route'
+import {appReady} from './model/main'
 
 const appRoutes: RouteType[] = Object.values(Routes.app)
 
 export const App: React.FC<RouteComponentProps> = ({location}) => {
+  React.useEffect(() => {
+    appReady()
+  })
   return (
     <AppLayout title={makeTitle(appRoutes, location.pathname)}>
       <Route path={Routes.root.path} exact component={Home} />
