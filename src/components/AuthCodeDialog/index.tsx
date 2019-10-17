@@ -15,7 +15,6 @@ export const AuthCodeDialog: React.FC<Props> = ({onSaveClick}) => {
     setCode(event.target.value)
   }
   const handleClick = (): void => {
-    console.log(code)
     onSaveClick(code)
   }
 

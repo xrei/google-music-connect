@@ -1,6 +1,6 @@
 import {createEvent, createStore} from 'effector'
 
-export const hideAuthCodeModal = createEvent<any>()
+export const hideAuthCodeModal = createEvent() as any
 export const showAuthCodeModal = createEvent()
 
 export const $modal = createStore(false)

@@ -1,9 +1,9 @@
 import Cookies from 'js-cookie'
 
 export type Device = {
-  code: string,
-  ip: string,
-  name: string,
+  code: string, // unique code
+  ip: string, // ip of the device
+  name: string, // device name
 }
 
 class AuthService {
@@ -14,10 +14,6 @@ class AuthService {
   async addCode(code: string): Promise<void> {
     const d = await this.devices
     await this.add({
-      ...d,
-      code
-    })
-    console.log({
       ...d,
       code
     })
