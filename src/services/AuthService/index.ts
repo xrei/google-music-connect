@@ -8,8 +8,10 @@ export type Device = {
 
 class AuthService {
   add(deviceObj: Device): Promise<void> {
-    Cookies.set('devices', deviceObj, {expires: 365})
-    return Promise.resolve()
+    return new Promise(resolve => {
+      Cookies.set('devices', deviceObj, {expires: 365})
+      resolve()
+    })
   }
   async addCode(code: string): Promise<void> {
     const d = await this.devices

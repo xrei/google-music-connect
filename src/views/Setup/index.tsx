@@ -65,7 +65,6 @@ const NewDeviceForm: React.FC = () => {
   const cls = useStyles()
 
   const handleSubmit = (e: React.SyntheticEvent): void => {
-    e.preventDefault()
     submitFormEvt()
   }
 
