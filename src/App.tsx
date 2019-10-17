@@ -4,7 +4,7 @@ import Routes from './routes'
 import {Home} from './views'
 import {AppLayout} from './layouts/AppLayout'
 import RouteType from './types/Route'
-import {appReady} from './model/main'
+import {appReady} from './models/main'
 
 const appRoutes: RouteType[] = Object.values(Routes.app)
 
