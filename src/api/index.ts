@@ -1,6 +1,7 @@
-import {createDomain} from 'effector'
+import {createDomain, createEvent} from 'effector'
 import {createSocket, Config} from './ws'
 import {onMessage, onConnClose, onError} from './events'
+import {toMsg} from './utils'
 
 export const wsDomain = createDomain('ws')
 export const $ws = wsDomain.store<WebSocket | null>(null)
@@ -20,6 +21,15 @@ $ws.on(createConnection.done, (_, {result: ws}) => {
 })
 $ws.on(createConnection.fail, () => null)
 
-function sleep(ms: number): Promise<any> {
+export const sendConnect = wsDomain.event<string[] | void>()
+$ws.watch(sendConnect, (ws, args) => {
+  ws && ws.send(toMsg({
+    namespace: 'connect',
+    method: 'connect',
+    arguments: args ? args : undefined
+  }))
+})
+
+function sleep(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms))
 }

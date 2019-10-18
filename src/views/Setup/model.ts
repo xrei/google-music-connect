@@ -1,8 +1,7 @@
 import {
   createEvent, createStore, createStoreObject, combine, createEffect
 } from 'effector'
-import {createConnection, $ws} from 'api/'
-import {toMsg} from 'api/utils'
+import {sendConnect, createConnection} from 'api/'
 import AuthService from 'services/AuthService'
 import {history} from 'routes'
 
@@ -47,21 +46,13 @@ submitFormEvt.watch(() => {
   const form = $form.getState()
   const localCon = createConnection(form)
   localCon.then((ws) => {
-    ws.send(toMsg({
-      namespace: 'connect',
-      method: 'connect'
-    }))
+    sendConnect()
   })
 })
 
 export const finishSetup = createEffect<string, void>()
 finishSetup.use((code) => {
-  let ws = $ws.getState()
-  ws && ws.send(toMsg({
-    namespace: 'connect',
-    method: 'connect',
-    arguments: ['_', code]
-  }))
+  sendConnect(['_', code])
   AuthService.add({
     code: '',
     ...$form.getState()
