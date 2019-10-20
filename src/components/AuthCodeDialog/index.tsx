@@ -16,6 +16,7 @@ export const AuthCodeDialog: React.FC<Props> = ({onSaveClick}) => {
   }
   const handleClick = (): void => {
     onSaveClick(code)
+    hideAuthCodeModal()
   }
 
   const disabled = !(code.length === 4)

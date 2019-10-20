@@ -26,8 +26,23 @@ $ws.watch(sendConnect, (ws, args) => {
   ws && ws.send(toMsg({
     namespace: 'connect',
     method: 'connect',
-    arguments: args ? args : undefined
+    arguments: args || []
   }))
+})
+
+export const sendNextTrack = wsDomain.event()
+$ws.watch(sendNextTrack, (ws) => {
+  ws && ws.send(toMsg({namespace: 'playback', method: 'forward'}))
+})
+
+export const sendPrevTrack = wsDomain.event()
+$ws.watch(sendPrevTrack, (ws) => {
+  ws && ws.send(toMsg({namespace: 'playback', method: 'rewind'}))
+})
+
+export const sendPlay = wsDomain.event()
+$ws.watch(sendPlay, (ws) => {
+  ws && ws.send(toMsg({namespace: 'playback', method: 'playPause'}))
 })
 
 function sleep(ms: number): Promise<void> {

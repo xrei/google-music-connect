@@ -2,12 +2,14 @@ import {createEvent} from 'effector'
 import AuthService from 'services/AuthService'
 import {showAuthCodeModal} from 'components/AuthCodeDialog/model'
 import {sendConnect} from './'
+import {changeTrack} from 'stores/TrackStore/track'
+import {updateTime, setPlaying} from 'stores/TrackStore/trackTime'
 
 export const onMessage = createEvent<MessageEvent>('onMessage')
 const filteredMsg = onMessage.map(({data}) => data).map(JSON.parse)
 filteredMsg.watch((data) => {
   const {channel, payload} = data
-  console.log(data)
+  // console.log(data)
   switch (channel) {
     case 'connect': {
       console.log(payload)
@@ -19,6 +21,27 @@ filteredMsg.watch((data) => {
       }
       break
     }
+    case 'track': {
+      const {title, artist, album, albumArt} = payload
+      changeTrack({
+        title,
+        artist,
+        album,
+        albumArt
+      })
+      break
+    }
+    case 'time': {
+      updateTime({
+        current: payload.current,
+        total: payload.total
+      })
+      break
+    }
+    case 'playState': {
+      setPlaying(payload)
+      break
+    }
     default: break
   }
 })
@@ -27,7 +50,9 @@ export const onConnOpen = createEvent<Event | void>('onConnOpen')
 onConnOpen.watch((e) => {
   e && console.log('socket connected on: ' + (e.target as WebSocket).url)
   AuthService.devices
-    .then((v) => sendConnect([v.name, v.code]))
+    .then((v) => {
+      sendConnect([v.name, v.code])
+    })
     .catch(console.log)
 })
 

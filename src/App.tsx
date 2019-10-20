@@ -5,6 +5,7 @@ import {Home} from './views'
 import {AppLayout} from './layouts/AppLayout'
 import RouteType from './types/Route'
 import {appReady} from './models/main'
+import {TrackPanel} from 'components/TrackPanel'
 
 const appRoutes: RouteType[] = Object.values(Routes.app)
 
@@ -13,7 +14,9 @@ export const App: React.FC<RouteComponentProps> = ({location}) => {
     appReady()
   })
   return (
-    <AppLayout title={makeTitle(appRoutes, location.pathname)}>
+    <AppLayout title={makeTitle(appRoutes, location.pathname)}
+      bottomPanel={TrackPanel}
+    >
       <Route path={Routes.root.path} exact component={Home} />
       {
         appRoutes.map(({path, view}, i) => (
