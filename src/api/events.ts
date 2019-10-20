@@ -1,49 +1,38 @@
-import {createEvent} from 'effector'
+import {createEvent, split} from 'effector'
 import AuthService from 'services/AuthService'
-import {showAuthCodeModal} from 'components/AuthCodeDialog/model'
+import {Data} from './types'
 import {sendConnect} from './'
+import {showAuthCodeModal} from 'components/AuthCodeDialog/model'
 import {changeTrack} from 'stores/TrackStore/track'
 import {updateTime, setPlaying} from 'stores/TrackStore/trackTime'
+import {channelMatcher} from './matcher'
+
 
 export const onMessage = createEvent<MessageEvent>('onMessage')
-const filteredMsg = onMessage.map(({data}) => data).map(JSON.parse)
-filteredMsg.watch((data) => {
-  const {channel, payload} = data
-  // console.log(data)
-  switch (channel) {
-    case 'connect': {
-      console.log(payload)
-      if (payload === 'CODE_REQUIRED') {
-        showAuthCodeModal()
-      } else {
-        AuthService.addCode(payload)
-          .then(() => onConnOpen())
-      }
-      break
-    }
-    case 'track': {
-      const {title, artist, album, albumArt} = payload
-      changeTrack({
-        title,
-        artist,
-        album,
-        albumArt
-      })
-      break
-    }
-    case 'time': {
-      updateTime({
-        current: payload.current,
-        total: payload.total
-      })
-      break
-    }
-    case 'playState': {
-      setPlaying(payload)
-      break
-    }
-    default: break
-  }
+const filteredMsg = onMessage.map(({data}) => JSON.parse(data) as Data)
+
+const channel = split(filteredMsg, channelMatcher)
+channel.connect.watch(({payload}) => {
+  if (payload === 'CODE_REQUIRED') {
+    showAuthCodeModal()
+  } else {
+    AuthService.addCode(payload)
+      .then(() => onConnOpen())
+  }  
+})
+channel.track.watch(({payload}) => {
+  const {title, artist, album, albumArt} = payload
+  console.log(payload)
+  changeTrack({title, artist, album, albumArt})
+})
+channel.time.watch(({payload}) => {
+  updateTime({
+    current: payload.current,
+    total: payload.total
+  }) 
+})
+channel.playState.watch(({payload}) => {
+  setPlaying(payload)
 })
 
 export const onConnOpen = createEvent<Event | void>('onConnOpen')

@@ -3,3 +3,8 @@ export type Message = {
   method: string,
   arguments?: string[] | number[],
 }
+
+export type Data = {
+  channel: string,
+  payload: any,
+}
