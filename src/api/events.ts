@@ -10,6 +10,7 @@ import {channelMatcher} from './matcher'
 
 export const onMessage = createEvent<MessageEvent>('onMessage')
 const filteredMsg = onMessage.map(({data}) => JSON.parse(data) as Data)
+// filteredMsg.watch(console.log)
 
 const channel = split(filteredMsg, channelMatcher)
 channel.connect.watch(({payload}) => {
