@@ -15,7 +15,7 @@ export const App: React.FC<RouteComponentProps> = ({location}) => {
   })
   return (
     <AppLayout title={makeTitle(appRoutes, location.pathname)}
-      bottomPanel={TrackPanel}
+      bottomPanel={<TrackPanel/>}
     >
       <Route path={Routes.root.path} exact component={Home} />
       {

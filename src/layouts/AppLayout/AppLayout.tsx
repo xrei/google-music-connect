@@ -9,7 +9,7 @@ import {sendConnect} from 'api'
 type Props = {
   children: React.ReactNode,
   title: string,
-  bottomPanel?: any,
+  bottomPanel?: React.ReactNode,
 }
 
 export const AppLayout: React.FC<Props> = ({children, title, bottomPanel}) => {
@@ -25,7 +25,7 @@ export const AppLayout: React.FC<Props> = ({children, title, bottomPanel}) => {
       </Content>
       {
         bottomPanel && <BottomPanel>
-          {bottomPanel()}
+          {bottomPanel}
         </BottomPanel>
       }
       <AuthCodeDialog onSaveClick={(code) => sendConnect(['_', code])} />

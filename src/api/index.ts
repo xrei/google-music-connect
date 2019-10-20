@@ -1,4 +1,4 @@
-import {createDomain, createEvent} from 'effector'
+import {createDomain} from 'effector'
 import {createSocket, Config} from './ws'
 import {onMessage, onConnClose, onError} from './events'
 import {toMsg} from './utils'
@@ -8,7 +8,7 @@ export const $ws = wsDomain.store<WebSocket | null>(null)
 export const createConnection = wsDomain.effect<Config, WebSocket, Error>()
 
 createConnection.use(async (params) => {
-  await sleep(1000)
+  await sleep(500)
   const ws = await createSocket(params)
   return ws
 })
