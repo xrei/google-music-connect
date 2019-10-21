@@ -46,7 +46,7 @@ const ContentWrap = styled(Container)`
   margin-top: 64px;
   padding: 0;
   @media (max-width: 600px) {
-    margin-top: 60px;
+    margin-top: 56px;
   }
 `
 

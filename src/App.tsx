@@ -12,7 +12,7 @@ const appRoutes: RouteType[] = Object.values(Routes.app)
 export const App: React.FC<RouteComponentProps> = ({location}) => {
   React.useEffect(() => {
     appReady()
-  })
+  }, [])
   return (
     <AppLayout title={makeTitle(appRoutes, location.pathname)}
       bottomPanel={<TrackPanel/>}

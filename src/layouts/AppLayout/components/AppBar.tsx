@@ -3,6 +3,7 @@ import {AppBar as MuiAppBar, Toolbar, IconButton, Theme, Typography} from '@mate
 import {Menu as MenuIcon, Search as SearchIcon} from '@material-ui/icons'
 import {makeStyles, createStyles} from '@material-ui/styles'
 import {toggle as DrawerToggle} from './SideMenuStore'
+import {HideOnScroll} from 'components/HideOnScroll'
 
 type Props = {
   title: string,
@@ -13,7 +14,8 @@ export const AppBar: React.FC<Props> = ({title}) => {
 
   return (
     <div>
-      <MuiAppBar position="fixed" className={classes.grow}>
+      <HideOnScroll>
+      <MuiAppBar className={classes.grow} elevation={0}>
         <Toolbar>
           <IconButton
             edge="start"
@@ -35,6 +37,7 @@ export const AppBar: React.FC<Props> = ({title}) => {
           </IconButton>
         </Toolbar>
       </MuiAppBar>
+      </HideOnScroll>
     </div>
   )
 }
