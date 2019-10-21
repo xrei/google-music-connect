@@ -1,10 +1,10 @@
 import {createEvent, split} from 'effector'
 import AuthService from 'services/AuthService'
+import {channelComparator} from './comparator'
 import {sendConnect} from './'
 import {showAuthCodeModal} from 'components/AuthCodeDialog/model'
 import {changeTrack} from 'stores/TrackStore/track'
 import {updateTime, setPlaying} from 'stores/TrackStore/trackTime'
-import {channelComparator} from './comparator'
 
 export const onMessage = createEvent<MessageEvent>('onMessage')
 const filteredMsg = onMessage.map(({data}) => JSON.parse(data))
