@@ -1,7 +1,7 @@
 import React from 'react'
 import {Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button} from '@material-ui/core'
 import {useStore} from 'effector-react'
-import {$modal,hideAuthCodeModal} from './model'
+import {$modal, hideAuthCodeModal} from './model'
 
 type Props = {
   onSaveClick: (code: string) => void,
