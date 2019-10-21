@@ -7,7 +7,6 @@ import {changeTrack} from 'stores/TrackStore/track'
 import {updateTime, setPlaying} from 'stores/TrackStore/trackTime'
 import {channelMatcher} from './matcher'
 
-
 export const onMessage = createEvent<MessageEvent>('onMessage')
 const filteredMsg = onMessage.map(({data}) => JSON.parse(data) as Data)
 // filteredMsg.watch(console.log)
