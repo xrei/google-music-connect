@@ -1,29 +1,27 @@
 import {createEvent, split} from 'effector'
 import AuthService from 'services/AuthService'
-import {Data} from './types'
 import {sendConnect} from './'
 import {showAuthCodeModal} from 'components/AuthCodeDialog/model'
 import {changeTrack} from 'stores/TrackStore/track'
 import {updateTime, setPlaying} from 'stores/TrackStore/trackTime'
-import {channelMatcher} from './matcher'
+import {channelComparator} from './comparator'
 
 export const onMessage = createEvent<MessageEvent>('onMessage')
-const filteredMsg = onMessage.map(({data}) => JSON.parse(data) as Data)
-// filteredMsg.watch(console.log)
+const filteredMsg = onMessage.map(({data}) => JSON.parse(data))
+filteredMsg.watch(console.log)
 
-const channel = split(filteredMsg, channelMatcher)
-channel.connect.watch(({payload}) => {
-  if (payload === 'CODE_REQUIRED') {
+const channel = split(filteredMsg, channelComparator)
+channel.connect.watch((data) => {
+  if (data.payload === 'CODE_REQUIRED') {
     showAuthCodeModal()
   } else {
-    AuthService.addCode(payload)
+    AuthService.addCode(data.payload)
       .then(() => onConnOpen())
   }  
 })
 channel.track.watch(({payload}) => {
-  const {title, artist, album, albumArt} = payload
   console.log(payload)
-  changeTrack({title, artist, album, albumArt})
+  changeTrack(payload)
 })
 channel.time.watch(({payload}) => {
   updateTime({
