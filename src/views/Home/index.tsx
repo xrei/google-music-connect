@@ -67,6 +67,7 @@ const TabsWrapper: React.FC = () => {
               id={`tab-${i}`}
               aria-controls={`library-tabpanel-${i}`}
               disabled={v.disabled}
+              key={i}
             />
           })}
         </Tabs>

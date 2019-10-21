@@ -46,4 +46,11 @@ onConnOpen.watch((e) => {
 })
 
 export const onConnClose = createEvent<CloseEvent>('onConnClose')
+onConnClose.watch((e) => {
+  console.log(e)
+})
+
 export const onError = createEvent<Event>('onError')
+onError.watch((e) => {
+  console.log(e)
+})
