@@ -8,7 +8,10 @@ import {updateTime, setPlaying} from 'stores/TrackStore/trackTime'
 
 export const onMessage = createEvent<MessageEvent>('onMessage')
 const filteredMsg = onMessage.map(({data}) => JSON.parse(data))
-// filteredMsg.watch(console.log)
+filteredMsg.watch((d) => {
+  if (d.channel === 'time') return
+  console.log(d)
+})
 
 const channel = split(filteredMsg, channelComparator)
 channel.connect.watch((data) => {
@@ -20,7 +23,7 @@ channel.connect.watch((data) => {
   }  
 })
 channel.track.watch(({payload}) => {
-  console.log(payload)
+  // console.log(payload)
   changeTrack(payload)
 })
 channel.time.watch(({payload}) => {

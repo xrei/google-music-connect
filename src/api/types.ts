@@ -4,17 +4,18 @@ export type Message = {
   arguments?: string[] | number[],
 }
 
-type Track = {
+export type Track = {
   title: string,
   artist: string,
   album: string,
   albumArt: string,
 }
 
-type ExtTrack = Track & {
+export type ExtTrack = Track & {
   albumArtist: string,
   albumId: string,
   artistId: string,
+  artistImage?: string,
   id: string,
   duration: number,
   playCount: number,
