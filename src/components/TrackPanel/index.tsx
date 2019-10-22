@@ -1,6 +1,6 @@
 import React from 'react'
 import {useStore} from 'effector-react'
-import {Theme, makeStyles} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import {Card, CardMedia, IconButton, Typography} from '@material-ui/core'
 import {
   PlayArrow as PlayArrowIcon,
@@ -12,7 +12,7 @@ import {$track} from 'stores/TrackStore/track'
 import {$trackTime} from 'stores/TrackStore/trackTime'
 import {sendNextTrack, sendPrevTrack, sendPlay} from 'api'
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(() => ({
   card: {
     display: 'flex',
     position: 'relative',

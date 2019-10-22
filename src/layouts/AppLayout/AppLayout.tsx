@@ -5,14 +5,14 @@ import {AppBar} from './components/AppBar'
 import {SideMenu} from './components/SideMenu'
 import {AuthCodeDialog} from '../../components/AuthCodeDialog'
 import {sendConnect} from 'api'
+import {TrackPanel} from 'components/TrackPanel'
 
 type Props = {
   children: React.ReactNode,
   title: string,
-  bottomPanel?: React.ReactNode,
 }
 
-export const AppLayout: React.FC<Props> = ({children, title, bottomPanel}) => {
+export const AppLayout: React.FC<Props> = ({children, title}) => {
   return (
     <Layout>
       <CssBaseline />
@@ -23,11 +23,9 @@ export const AppLayout: React.FC<Props> = ({children, title, bottomPanel}) => {
           {children}
         </ContentWrap>
       </Content>
-      {
-        bottomPanel && <BottomPanel>
-          {bottomPanel}
-        </BottomPanel>
-      }
+      <BottomPanel>
+        <TrackPanel />
+      </BottomPanel>
       <AuthCodeDialog onSaveClick={(code) => sendConnect(['_', code])} />
     </Layout>
   )
