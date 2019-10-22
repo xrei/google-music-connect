@@ -1,11 +1,11 @@
 import React from 'react'
-import {Theme, Typography, Button, Paper, makeStyles, TextField, 
-  CircularProgress
+import {
+  Theme, Typography, Button, Paper, makeStyles, TextField,  CircularProgress
 } from '@material-ui/core'
 import {useStore} from 'effector-react'
 import {
   $ip, $ipCorrect, $name, $nameCorrect,
-  mountFormEvt, unmountFormEvt, submitFormEvt,
+  pageMounted, pageUnmounted, submitFormEvt,
   IPChangeEvt, nameChangeEvt, $isSubmitEnabled, $isConnecting, finishSetup
 } from './model'
 import {AuthCodeDialog} from 'components/AuthCodeDialog'
@@ -38,8 +38,8 @@ const useStyles = makeStyles((theme: Theme) => ({
 export const Setup: React.FC = () => {
   const c = setupStyles()
   React.useEffect(() => {
-    mountFormEvt()
-    return unmountFormEvt as unknown as void
+    pageMounted()
+    return pageUnmounted as unknown as void
   })
 
   const dialogClickSave = (code: string): void => {

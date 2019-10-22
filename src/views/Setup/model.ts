@@ -8,8 +8,8 @@ import {history} from 'routes'
 export const IPChangeEvt = createEvent<any>()
 export const nameChangeEvt = createEvent<any>()
 export const submitFormEvt = createEvent()
-export const mountFormEvt = createEvent()
-export const unmountFormEvt = createEvent<void>()
+export const pageMounted = createEvent()
+export const pageUnmounted = createEvent<void>()
 
 export const $ip = createStore<string>('')
 export const $ipCorrect = $ip.map(isValidIP)
@@ -38,9 +38,9 @@ export const $isSubmitEnabled = combine(
 const trimEvt = ({target}: {target: HTMLInputElement}): string => target.value.trim()
 
 $ip.on(IPChangeEvt.map(trimEvt), (_, ip) => ip)
-$ip.reset(unmountFormEvt, mountFormEvt)
+$ip.reset(pageUnmounted, pageMounted)
 $name.on(nameChangeEvt.map(trimEvt), (_, name) => name)
-$name.reset(unmountFormEvt, mountFormEvt)
+$name.reset(pageUnmounted, pageMounted)
 
 submitFormEvt.watch(() => {
   const form = $form.getState()
@@ -65,3 +65,9 @@ finishSetup.done.watch(() => {
 function isValidIP(ip: string): boolean {
   return /^(?=\d+\.\d+\.\d+\.\d+$)(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[0-9])\.?){4}$/.test(ip)
 }
+
+pageMounted.watch(() => {
+  if (AuthService.hasDevice()) {
+    history.push('/')
+  }
+})
