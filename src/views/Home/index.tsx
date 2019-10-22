@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  AppBar, Box,
+  AppBar, Paper,
   Tabs, Tab,
   Typography,
   makeStyles,
@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core'
 import SwipeableViews from 'react-swipeable-views'
 import {HideOnScroll} from 'components/HideOnScroll'
+import {QueueView} from './components/QueueView'
 
 const tabs = [
   {
@@ -34,6 +35,7 @@ const tabs = [
 
 export const Home: React.FC = () => {
   const c = homeStyles()
+
   return (
     <div className={c.homeWrapper}>
       <TabsWrapper />
@@ -76,7 +78,7 @@ const TabsWrapper: React.FC = () => {
 
     <SwipeableViews index={tab} onChangeIndex={handleChangeIndex}>
       <TabPanel value={tab} index={0}>
-        queue
+        <QueueView />
       </TabPanel>
     </SwipeableViews>
   </>
@@ -100,7 +102,7 @@ const TabPanel: React.FC<TabViewProps> = (props) => {
       aria-labelledby={`tab-${index}`}
       {...rest}
     >
-      <Box p={1}>{children}</Box>
+      <Paper square elevation={0}>{children}</Paper>
     </Typography>
   )
 }
@@ -111,16 +113,12 @@ const styles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       marginTop: 56
     }
-  },
-  homeWrapper: {
-    position: 'relative',
-    paddingTop: 48
   }
 }))
 
 const homeStyles = makeStyles({
   homeWrapper: {
     position: 'relative',
-    paddingTop: 48
+    marginTop: 48
   }
 })
