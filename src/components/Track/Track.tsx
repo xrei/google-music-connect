@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {SyntheticEvent} from 'react'
 import {makeStyles, Typography} from '@material-ui/core'
 import {TrackImg} from './TrackImg'
 import {TrackMenu, MenuItem} from './TrackMenu'
@@ -15,12 +15,13 @@ export const Track: React.FC<Props> = (props) => {
   const {track, menuItems, onClick} = props
   const c = useStyles(props)
 
-  const handleClick = (track: ExtTrack): void => {
+  const handleClick = (track: ExtTrack) => (e: SyntheticEvent): void => {
+    console.log(track)
     onClick && onClick(track)
   }
 
   return (
-    <div className={c.root} onClick={() => handleClick(track)}>
+    <div className={c.root} onClick={handleClick(track)}>
       <TrackImg className={c.cover} image={track.albumArt} />
       <div className={c.trackInfo}>
         <Typography  className={c.trackTitle} variant="body1">{track.title}</Typography>

@@ -24,6 +24,10 @@ export const TrackMenu: React.FC<Props> = ({menuItems, track}) => {
     item.onClick(track)
   }
 
+  const containerClick = (e: SyntheticEvent) => {
+    e.stopPropagation()
+  }
+
   const items = menuItems.map((v, i) => {
     return (
       <MenuItem key={i} onClick={handleItemClick(v)} className={c.menuItem}>
@@ -33,7 +37,7 @@ export const TrackMenu: React.FC<Props> = ({menuItems, track}) => {
   })
 
   return (
-    <div>
+    <div onClick={containerClick}>
       <IconButton
         aria-label="more"
         aria-controls="track-menu"
