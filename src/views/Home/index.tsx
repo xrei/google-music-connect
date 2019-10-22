@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 import {
   AppBar, Box,
   Tabs, Tab,
@@ -34,10 +33,11 @@ const tabs = [
 ]
 
 export const Home: React.FC = () => {
+  const c = homeStyles()
   return (
-    <HomeWrapper>
+    <div className={c.homeWrapper}>
       <TabsWrapper />
-    </HomeWrapper>
+    </div>
   )
 }
 
@@ -111,10 +111,16 @@ const styles = makeStyles((theme: Theme) => ({
     [theme.breakpoints.down('xs')]: {
       marginTop: 56
     }
+  },
+  homeWrapper: {
+    position: 'relative',
+    paddingTop: 48
   }
 }))
 
-const HomeWrapper = styled.div`
-  position: relative;
-  padding-top: 48px;
-`
+const homeStyles = makeStyles({
+  homeWrapper: {
+    position: 'relative',
+    paddingTop: 48
+  }
+})

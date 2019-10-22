@@ -15,7 +15,7 @@ ReactDOM.render(
   <StylesProvider injectFirst>
     <ThemeProvider theme={theme}>
       <Router history={history}>
-        <Route path={Routes.setup.path} component={Setup}/>
+        <Route exact path={Routes.setup.path} component={Setup}/>
         <PrivateRoute
           path={Routes.root.path}
           redirect={Routes.setup.path}

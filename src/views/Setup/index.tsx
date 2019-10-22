@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 import {Theme, Typography, Button, Paper, makeStyles, TextField, 
   CircularProgress
 } from '@material-ui/core'
@@ -37,6 +36,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 
 export const Setup: React.FC = () => {
+  const c = setupStyles()
   React.useEffect(() => {
     mountFormEvt()
     return unmountFormEvt as unknown as void
@@ -47,15 +47,15 @@ export const Setup: React.FC = () => {
   }
 
   return (
-    <Container>
-      <Title variant="h3" component="h1" color="primary">Welcome</Title>
-      <SubTitle>
+    <div className={c.Container}>
+      <Typography className={c.Title} variant="h3" component="h1" color="primary">Welcome</Typography>
+      <Typography className={c.subTitle}>
         It seems you don't have any connected devices.<br/>Please connect to such device in first place to use app.<br/>Make sure your pc/device has running<br/>
         <a rel="noopener noreferrer" target="_blank"  href="https://github.com/MarshallOfSound/Google-Play-Music-Desktop-Player-UNOFFICIAL-">Google Play Music Desktop</a>
-      </SubTitle>
+      </Typography>
       <NewDeviceForm />
       <AuthCodeDialog onSaveClick={dialogClickSave}/>
-    </Container>
+    </div>
   )
 }
 
@@ -122,20 +122,20 @@ const NameInput: React.FC<{className: string}> = ({className}) => {
   )
 }
 
-const Container = styled.div`
-  display: flex;
-  flex-flow: column;
-  text-align: center;
-  max-width: 768px;
-  padding: 8px;
-  margin: 32px auto;
-`
-
-const Title = styled(Typography)`
-  margin-bottom: 2rem;
-  font-weight: normal;
-`
-
-const SubTitle = styled(Typography)`
-  margin-bottom: 48px;
-`
+const setupStyles = makeStyles({
+  Container: {
+    display: 'flex',
+    flexFlow: 'column',
+    textAlign: 'center',
+    maxWidth: '768px',
+    padding: '8px',
+    margin: '32px auto'
+  },
+  Title: {
+    marginBottom: '2rem',
+    fontWeight: 'normal'
+  },
+  subTitle: {
+    marginBottom: '48px'
+  }
+})

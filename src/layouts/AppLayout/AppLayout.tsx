@@ -1,6 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
-import {Container, CssBaseline} from '@material-ui/core'
+import {Container, CssBaseline, makeStyles} from '@material-ui/core'
 import {AppBar} from './components/AppBar'
 import {SideMenu} from './components/SideMenu'
 import {AuthCodeDialog} from '../../components/AuthCodeDialog'
@@ -13,43 +12,45 @@ type Props = {
 }
 
 export const AppLayout: React.FC<Props> = ({children, title}) => {
+  const c = useStyles()
   return (
-    <Layout>
+    <div className={c.Layout}>
       <CssBaseline />
       <AppBar title={title}/>
       <SideMenu />
-      <Content>
-        <ContentWrap maxWidth="md">
+      <main className={c.Content}>
+        <Container className={c.ContentWrap} maxWidth="md">
           {children}
-        </ContentWrap>
-      </Content>
-      <BottomPanel>
+        </Container>
+      </main>
+      <div className={c.BottomPanel}>
         <TrackPanel />
-      </BottomPanel>
+      </div>
       <AuthCodeDialog onSaveClick={(code) => sendConnect(['_', code])} />
-    </Layout>
+    </div>
   )
 }
 
-const Layout = styled.div`
-  display: flex;
-  position: relative;
-`
-const Content = styled.main`
-  display: flex;
-  flex-grow: 1;
-  height: 100vh;
-`
-const ContentWrap = styled(Container)`
-  margin-top: 64px;
-  padding: 0;
-  @media (max-width: 600px) {
-    margin-top: 56px;
+const useStyles = makeStyles({
+  Layout: {
+    display: 'flex',
+    position: 'relative'
+  },
+  Content: {
+    display: 'flex',
+    flexGrow: 1,
+    height: '100vh'
+  },
+  ContentWrap: {
+    marginTop: 64,
+    padding: 0,
+    ['@media (max-width: 600px)']: {// eslint-disable-line no-useless-computed-key
+      marginTop: 56
+    }
+  },
+  BottomPanel: {
+    position: 'fixed',
+    bottom: 0,
+    width: '100%'
   }
-`
-
-const BottomPanel = styled.div`
-  position: fixed;
-  bottom: 0;
-  width: 100%
-`
+})
