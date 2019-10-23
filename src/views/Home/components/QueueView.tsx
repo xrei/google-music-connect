@@ -1,13 +1,16 @@
 import React from 'react'
-import {useStoreMap, createComponent} from 'effector-react'
+import {useStoreMap, createComponent, useStore} from 'effector-react'
 import {Track} from 'components/Track'
 import {$queue} from 'stores/Queue'
 import {sendPlayQueueTrack} from 'api'
+import {makeStyles, Paper, Typography} from '@material-ui/core'
 
 export const QueueView: React.FC = () => {
-
+  const len = useStore($queue).length
   return (
-    <TrackList />
+    len > 0
+    ? <TrackList />
+    : <EmptyQueue/>
   )
 }
 
@@ -36,3 +39,31 @@ const MenuItems = [
     }
   }
 ]
+
+const useStyles = makeStyles({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    padding: 32,
+    textAlign: 'center'
+  },
+  paper: {
+    padding: 32
+  }
+})
+
+const EmptyQueue: React.FC = () => {
+  const c = useStyles()
+  return (
+    <div className={c.root}>
+      <Paper className={c.paper} elevation={10}>
+        <Typography variant="h6">
+          Queue is empty
+        </Typography>
+        <Typography variant="subtitle1">
+          Start some music or add some track to queue 
+        </Typography>
+      </Paper>
+    </div>
+  )
+}
