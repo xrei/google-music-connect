@@ -1,5 +1,5 @@
 import React, {SyntheticEvent} from 'react'
-import {makeStyles, Typography} from '@material-ui/core'
+import {makeStyles, Typography, ButtonBase} from '@material-ui/core'
 import {TrackImg} from './TrackImg'
 import {TrackMenu, MenuItem} from './TrackMenu'
 import {ExtTrack} from 'api/types'
@@ -21,7 +21,7 @@ export const Track: React.FC<Props> = (props) => {
   }
 
   return (
-    <div className={c.root} onClick={handleClick(track)}>
+    <ButtonBase component="div" className={c.root} onClick={handleClick(track)}>
       <TrackImg className={c.cover} image={track.albumArt} />
       <div className={c.trackInfo}>
         <Typography  className={c.trackTitle} variant="body1">{track.title}</Typography>
@@ -35,7 +35,7 @@ export const Track: React.FC<Props> = (props) => {
         menuItems={menuItems}
         track={track}
       />
-    </div>
+    </ButtonBase>
   )
 }
 
@@ -48,6 +48,7 @@ const useStyles = makeStyles({
   },
   cover: {
     width: 56,
+    height: '100%',
     marginRight: 12
   },
   trackInfo: {
