@@ -6,7 +6,7 @@ export const history = createBrowserHistory()
 export default {
   root: {
     path: '/',
-    title: 'Home'
+    title: 'Library'
   },
   app: {
     playlists: {

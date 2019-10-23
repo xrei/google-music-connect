@@ -22,7 +22,7 @@ export const MenuList: React.FC = () => {
           activeClassName={classess.active}
         >
           <ListItemIcon><HomeIcn /></ListItemIcon>
-          <ListItemText>Home</ListItemText>
+          <ListItemText>Library</ListItemText>
         </ListItem>
 
         <ListItem button
