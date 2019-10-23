@@ -30,7 +30,7 @@ const TrackList = createComponent($queue, (_, tracks) => {
 
 const MenuItems = [
   {
-    name: 'Add to queue',
+    name: 'Remove from queue',
     onClick: (track: any): void => {
       console.log(track)
     }

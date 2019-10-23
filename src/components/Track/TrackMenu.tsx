@@ -54,6 +54,10 @@ export const TrackMenu: React.FC<Props> = ({menuItems, track}) => {
         MenuListProps={{
           style: {padding: 0},
         }}
+        transformOrigin={{
+          vertical: 'center',
+          horizontal: 'center',
+        }}
       >
         {items}
       </Menu>
