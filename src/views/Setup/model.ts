@@ -46,7 +46,7 @@ submitFormEvt.watch(() => {
   const form = $form.getState()
   const localCon = createConnection(form)
   localCon.then((ws) => {
-    sendConnect()
+    sendConnect([form.name])
   })
 })
 

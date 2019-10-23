@@ -1,7 +1,7 @@
 export type Message = {
   namespace: string,
   method: string,
-  arguments?: string[] | number[],
+  arguments?: string[] | number[] | ExtTrack[],
 }
 
 export type Track = {

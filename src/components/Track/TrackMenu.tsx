@@ -24,7 +24,7 @@ export const TrackMenu: React.FC<Props> = ({menuItems, track}) => {
     item.onClick(track)
   }
 
-  const containerClick = (e: SyntheticEvent) => {
+  const containerClick = (e: SyntheticEvent): void => {
     e.stopPropagation()
   }
 
@@ -49,7 +49,6 @@ export const TrackMenu: React.FC<Props> = ({menuItems, track}) => {
       <Menu
         id="track-menu"
         anchorEl={anchorEl}
-        keepMounted
         open={open}
         onClose={() => setAnchorEl(null)}
         MenuListProps={{

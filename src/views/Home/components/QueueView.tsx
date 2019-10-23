@@ -1,7 +1,8 @@
 import React from 'react'
-import {useStoreMap, createComponent, useStore} from 'effector-react'
+import {useStoreMap, createComponent} from 'effector-react'
 import {Track} from 'components/Track'
 import {$queue} from 'stores/Queue'
+import {sendPlayQueueTrack} from 'api'
 
 export const QueueView: React.FC = () => {
 
@@ -16,8 +17,10 @@ const TrackWrapper: React.FC<{id: string}> = ({id}) => {
     keys: [id],
     fn: (tracks, [trackId]) => tracks.find(({id}) => id === trackId)
   })
+
   return track
-    ? <Track track={track} menuItems={MenuItems} isPlaying={track.isPlaying}/>
+    ? <Track onClick={sendPlayQueueTrack}
+      track={track} menuItems={MenuItems} isPlaying={track.isPlaying}/>
     : <></>
 }
 

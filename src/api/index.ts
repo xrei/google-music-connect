@@ -2,6 +2,7 @@ import {createDomain} from 'effector'
 import {createSocket, Config} from './ws'
 import {onMessage, onConnClose, onError} from './events'
 import {toMsg} from './utils'
+import {ExtTrack} from './types'
 
 export const wsDomain = createDomain('ws')
 export const $ws = wsDomain.store<WebSocket | null>(null)
@@ -43,6 +44,10 @@ $ws.watch(sendPrevTrack, (ws) => {
 export const sendPlay = wsDomain.event()
 $ws.watch(sendPlay, (ws) => {
   ws && ws.send(toMsg({namespace: 'playback', method: 'playPause'}))
+})
+export const sendPlayQueueTrack = wsDomain.event<ExtTrack>()
+$ws.watch(sendPlayQueueTrack, (ws, t) => {
+  ws && ws.send(toMsg({namespace: 'queue', method: 'playTrack', arguments: [t]}))
 })
 
 function sleep(ms: number): Promise<void> {

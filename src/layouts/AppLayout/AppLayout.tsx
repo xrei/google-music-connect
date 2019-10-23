@@ -39,7 +39,7 @@ const useStyles = makeStyles({
   Content: {
     display: 'flex',
     flexGrow: 1,
-    height: '100vh'
+    minHeight: '100vh'
   },
   ContentWrap: {
     marginTop: 64,
