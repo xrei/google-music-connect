@@ -2,7 +2,6 @@ import React from 'react'
 import {
   AppBar, Paper,
   Tabs, Tab,
-  Typography,
   makeStyles,
   Theme
 } from '@material-ui/core'
@@ -94,8 +93,7 @@ type TabViewProps = {
 const TabPanel: React.FC<TabViewProps> = (props) => {
   const {children, value, index, ...rest} = props
   return (
-    <Typography
-      component="div"
+    <div
       role="tabpanel"
       hidden={value !== index}
       id={`library-tabpanel-${index}`}
@@ -103,7 +101,7 @@ const TabPanel: React.FC<TabViewProps> = (props) => {
       {...rest}
     >
       <Paper square elevation={0}>{children}</Paper>
-    </Typography>
+    </div>
   )
 }
 
