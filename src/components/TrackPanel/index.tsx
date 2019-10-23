@@ -50,7 +50,7 @@ export const TrackPanel: React.FC = () => {
   const art = track.albumArt || '_'
 
   return (
-    <Card className={c.card} square>
+    <Card className={c.card} square elevation={10}>
       <CardMedia
         className={c.cover}
         image={art}

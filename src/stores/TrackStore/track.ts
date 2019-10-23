@@ -1,6 +1,6 @@
 import {trackDomain} from './'
 
-type Track = {
+export type Track = {
   title: string | null,
   artist: string | null,
   album: string | null,
@@ -18,9 +18,7 @@ export const $track = trackDomain.store(defaultState)
 
 const changeTrack = trackDomain.event<Track>()
 
-$track.on(changeTrack, (state, track) => {
-  return {...state, ...track}
-})
+$track.on(changeTrack, (_, track) => track)
 
 export {
   changeTrack

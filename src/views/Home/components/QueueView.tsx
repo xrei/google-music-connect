@@ -1,5 +1,5 @@
 import React from 'react'
-import {useStoreMap, createComponent} from 'effector-react'
+import {useStoreMap, createComponent, useStore} from 'effector-react'
 import {Track} from 'components/Track'
 import {$queue} from 'stores/Queue'
 
@@ -16,7 +16,9 @@ const TrackWrapper: React.FC<{id: string}> = ({id}) => {
     keys: [id],
     fn: (tracks, [trackId]) => tracks.find(({id}) => id === trackId)
   })
-  return track ? <Track track={track} menuItems={MenuItems}/> : <></>
+  return track
+    ? <Track track={track} menuItems={MenuItems} isPlaying={track.isPlaying}/>
+    : <></>
 }
 
 const TrackList = createComponent($queue, (_, tracks) => {
