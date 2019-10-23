@@ -5,6 +5,7 @@ import {sendConnect} from './'
 import {showAuthCodeModal} from 'components/AuthCodeDialog/model'
 import {changeTrack} from 'stores/TrackStore/track'
 import {updateTime, setPlaying} from 'stores/TrackStore/trackTime'
+import {updateQueue} from 'stores/Queue'
 
 export const onMessage = createEvent<MessageEvent>('onMessage')
 const filteredMsg = onMessage.map(({data}) => JSON.parse(data))
@@ -34,6 +35,9 @@ channel.time.watch(({payload}) => {
 })
 channel.playState.watch(({payload}) => {
   setPlaying(payload)
+})
+channel.queue.watch(({payload}) => {
+  updateQueue(payload)
 })
 
 export const onConnOpen = createEvent<Event | void>('onConnOpen')

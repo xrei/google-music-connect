@@ -119,6 +119,7 @@ const styles = makeStyles((theme: Theme) => ({
 const homeStyles = makeStyles({
   homeWrapper: {
     position: 'relative',
-    marginTop: 48
+    marginTop: 48,
+    marginBottom: 80
   }
 })
