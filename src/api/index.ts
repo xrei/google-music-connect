@@ -22,7 +22,7 @@ $ws.on(createConnection.done, (_, {result: ws}) => {
 })
 $ws.on(createConnection.fail, () => null)
 
-export const sendConnect = wsDomain.event<string[] | void>()
+const sendConnect = wsDomain.event<string[] | void>()
 $ws.watch(sendConnect, (ws, args) => {
   ws && ws.send(toMsg({
     namespace: 'connect',
@@ -31,24 +31,32 @@ $ws.watch(sendConnect, (ws, args) => {
   }))
 })
 
-export const sendNextTrack = wsDomain.event()
+const sendNextTrack = wsDomain.event()
 $ws.watch(sendNextTrack, (ws) => {
   ws && ws.send(toMsg({namespace: 'playback', method: 'forward'}))
 })
 
-export const sendPrevTrack = wsDomain.event()
+const sendPrevTrack = wsDomain.event()
 $ws.watch(sendPrevTrack, (ws) => {
   ws && ws.send(toMsg({namespace: 'playback', method: 'rewind'}))
 })
 
-export const sendPlay = wsDomain.event()
+const sendPlay = wsDomain.event()
 $ws.watch(sendPlay, (ws) => {
   ws && ws.send(toMsg({namespace: 'playback', method: 'playPause'}))
 })
-export const sendPlayQueueTrack = wsDomain.event<ExtTrack>()
+const sendPlayQueueTrack = wsDomain.event<ExtTrack>()
 $ws.watch(sendPlayQueueTrack, (ws, t) => {
   ws && ws.send(toMsg({namespace: 'queue', method: 'playTrack', arguments: [t]}))
 })
+
+export const api = {
+  sendConnect,
+  sendNextTrack,
+  sendPrevTrack,
+  sendPlay,
+  sendPlayQueueTrack
+}
 
 function sleep(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms))
