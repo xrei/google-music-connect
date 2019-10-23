@@ -8,9 +8,9 @@ import {
   SkipPrevious as SkipPreviousIcon,
   SkipNext as SkipNextIcon
 } from '@material-ui/icons'
+import {api} from 'api'
 import {$track} from 'stores/TrackStore/track'
 import {$trackTime} from 'stores/TrackStore/trackTime'
-import {sendNextTrack, sendPrevTrack, sendPlay} from 'api'
 
 const useStyles = makeStyles(() => ({
   card: {
@@ -60,16 +60,16 @@ export const TrackPanel: React.FC = () => {
         <Typography>{track.artist || '_'}</Typography>
       </div>
       <div className={c.controls}>
-        <IconButton aria-label="previous" onClick={() => sendPrevTrack()}>
+        <IconButton aria-label="previous" onClick={() => api.sendPrevTrack()}>
           <SkipPreviousIcon />
         </IconButton>
-        <IconButton aria-label="play/pause" onClick={() => sendPlay()}>
+        <IconButton aria-label="play/pause" onClick={() => api.sendPlay()}>
           { trackTime.isPlaying
             ? <PauseIcon color="secondary" className={`${c.ctrlIcon}`} />
             : <PlayArrowIcon className={c.ctrlIcon} />
           }
         </IconButton>
-        <IconButton aria-label="next" onClick={() => sendNextTrack()}>
+        <IconButton aria-label="next" onClick={() => api.sendNextTrack()}>
           <SkipNextIcon />
         </IconButton>
       </div>

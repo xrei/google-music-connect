@@ -2,8 +2,9 @@ import React from 'react'
 import {useStoreMap, createComponent, useStore} from 'effector-react'
 import {Track} from 'components/Track'
 import {$queue} from 'stores/Queue'
-import {sendPlayQueueTrack} from 'api'
+import {api} from 'api'
 import {makeStyles, Paper, Typography} from '@material-ui/core'
+import {ExtTrack} from 'api/types'
 
 export const QueueView: React.FC = () => {
   const len = useStore($queue).length
@@ -22,7 +23,7 @@ const TrackWrapper: React.FC<{id: string}> = ({id}) => {
   })
 
   return track
-    ? <Track onClick={sendPlayQueueTrack}
+    ? <Track onClick={api.sendPlayQueueTrack}
       track={track} menuItems={MenuItems} isPlaying={track.isPlaying}/>
     : <></>
 }
@@ -34,7 +35,7 @@ const TrackList = createComponent($queue, (_, tracks) => {
 const MenuItems = [
   {
     name: 'Remove from queue',
-    onClick: (track: any): void => {
+    onClick: (track: ExtTrack): void => {
       console.log(track)
     }
   }

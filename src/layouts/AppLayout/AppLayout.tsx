@@ -3,7 +3,7 @@ import {Container, CssBaseline, makeStyles} from '@material-ui/core'
 import {AppBar} from './components/AppBar'
 import {SideMenu} from './components/SideMenu'
 import {AuthCodeDialog} from '../../components/AuthCodeDialog'
-import {sendConnect} from 'api'
+import {api} from 'api'
 import {TrackPanel} from 'components/TrackPanel'
 
 type Props = {
@@ -26,7 +26,7 @@ export const AppLayout: React.FC<Props> = ({children, title}) => {
       <div className={c.BottomPanel}>
         <TrackPanel />
       </div>
-      <AuthCodeDialog onSaveClick={(code) => sendConnect(['_', code])} />
+      <AuthCodeDialog onSaveClick={(code) => api.sendConnect(['_', code])} />
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import {createEvent, split} from 'effector'
 import AuthService from 'services/AuthService'
+import {api} from './'
 import {channelComparator} from './comparator'
-import {sendConnect} from './'
 import {showAuthCodeModal} from 'components/AuthCodeDialog/model'
 import {changeTrack} from 'stores/TrackStore/track'
 import {updateTime, setPlaying} from 'stores/TrackStore/trackTime'
@@ -45,7 +45,7 @@ onConnOpen.watch((e) => {
   e && console.log('socket connected on: ' + (e.target as WebSocket).url)
   AuthService.devices
     .then((v) => {
-      sendConnect([v.name, v.code])
+      api.sendConnect([v.name, v.code])
     })
     .catch(console.log)
 })
