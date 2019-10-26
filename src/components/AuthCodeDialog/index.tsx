@@ -21,6 +21,13 @@ export const AuthCodeDialog: React.FC<Props> = ({onSaveClick}) => {
 
   const disabled = !(code.length === 4)
 
+  const handleEnterPress = (e: React.KeyboardEvent): void => {
+    if (e.keyCode === 13 && !disabled) {
+      handleClick()
+      e.preventDefault()
+    }
+  }
+
   return (
     <Dialog
       open={open}
@@ -29,6 +36,7 @@ export const AuthCodeDialog: React.FC<Props> = ({onSaveClick}) => {
       <DialogContent>
         <TextField type="number" required fullWidth 
           onChange={handleChange}
+          onKeyDown={handleEnterPress}
         />
       </DialogContent>
       <DialogActions>
