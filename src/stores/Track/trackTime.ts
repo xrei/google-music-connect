@@ -1,4 +1,4 @@
-import {trackDomain} from './'
+import {trackDomain} from '.'
 
 type TimeState = {
   current: number,

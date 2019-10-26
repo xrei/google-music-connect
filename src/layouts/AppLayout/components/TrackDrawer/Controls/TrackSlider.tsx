@@ -1,7 +1,7 @@
 import React from 'react'
 import {withStyles, Slider} from '@material-ui/core'
 import {useStore} from 'effector-react'
-import {$trackTime} from 'stores/TrackStore/trackTime'
+import {$trackTime} from 'stores/Track/trackTime'
 import {api} from 'api'
 
 export const TrackSlider: React.FC = () => {

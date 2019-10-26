@@ -5,7 +5,7 @@ import {
   CardMedia,
   Typography
 } from '@material-ui/core'
-import {$track} from 'stores/TrackStore/track'
+import {$track} from 'stores/Track/track'
 import {useStore} from 'effector-react'
 
 export const TopBar: React.FC = (props) => {

@@ -15,7 +15,7 @@ import {
 } from '@material-ui/icons'
 import {useStore} from 'effector-react'
 import {api} from 'api'
-import {$trackTime} from 'stores/TrackStore/trackTime'
+import {$trackTime} from 'stores/Track/trackTime'
 import {TrackVolume} from './TrackVolume'
 import {onToggleRepeat, $repeat} from 'stores/Playback'
 import {toggleThumbsUp, toggleThumbsDown, $rating} from 'stores/Rating'

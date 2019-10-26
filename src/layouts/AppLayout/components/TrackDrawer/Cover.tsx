@@ -1,7 +1,7 @@
 import React from 'react'
 import {makeStyles} from '@material-ui/core'
 import {useStore} from 'effector-react'
-import {$track} from 'stores/TrackStore/track'
+import {$track} from 'stores/Track/track'
 
 export const Cover: React.FC = (props) => {
   const {albumArt} = useStore($track)
@@ -10,8 +10,7 @@ export const Cover: React.FC = (props) => {
   const styles = albumArt ? {backgroundImage: `url('${albumArt}')`} : {}
 
   return (
-    <div className={c.fullscreenCover} style={styles}>
-    </div>
+    <div className={c.fullscreenCover} style={styles} />
   )
 }
 

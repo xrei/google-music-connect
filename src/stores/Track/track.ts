@@ -1,4 +1,4 @@
-import {trackDomain} from './'
+import {trackDomain} from '.'
 
 export type Track = {
   title: string | null,

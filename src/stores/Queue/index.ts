@@ -1,6 +1,6 @@
 import {createEvent, createStore} from 'effector'
 import {ExtTrack} from 'api/types'
-import {$track, Track} from 'stores/TrackStore/track'
+import {$track, Track} from 'stores/Track/track'
 
 type QueueTracks = ExtTrack & { isPlaying?: boolean }
 

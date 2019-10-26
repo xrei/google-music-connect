@@ -1,7 +1,7 @@
 import React from 'react'
 import {makeStyles} from '@material-ui/core'
 import {useStore} from 'effector-react'
-import {$fmtTime} from 'stores/TrackStore/trackTime'
+import {$fmtTime} from 'stores/Track/trackTime'
 
 export const TrackTime: React.FC = () => {
   const c = useStyles()

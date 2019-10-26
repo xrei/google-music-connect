@@ -9,8 +9,8 @@ import {
   SkipNext as SkipNextIcon
 } from '@material-ui/icons'
 import {api} from 'api'
-import {$track} from 'stores/TrackStore/track'
-import {$trackTime} from 'stores/TrackStore/trackTime'
+import {$track} from 'stores/Track/track'
+import {$trackTime} from 'stores/Track/trackTime'
 
 export const TrackPanel: React.FC = () => {
   const c = useStyles()
