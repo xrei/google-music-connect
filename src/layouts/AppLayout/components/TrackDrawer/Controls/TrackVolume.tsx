@@ -1,25 +1,32 @@
-import React, {SyntheticEvent} from 'react'
+import React from 'react'
 import {Slider, IconButton, Popover, makeStyles} from '@material-ui/core'
 import {VolumeUp as VolumeIcon} from '@material-ui/icons'
 import {useStore} from 'effector-react'
+import {$volume} from 'stores/TrackStore/volume'
+import {api} from 'api'
 
 export const TrackVolume: React.FC = () => {
   const c = useStyles()
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null)
+  const [touched, setTouch] = React.useState(false)
   const [tempVol, setVol] = React.useState(5)
+  const vol = useStore($volume)
 
   
   const open = Boolean(anchorEl)
   const id = open ? 'simple-popover' : undefined
 
   const trackVolChange = (e: React.ChangeEvent, nv: number | number[]): void => {
-    (e.stopPropagation())
+    e.stopPropagation()
+    setTouch(true)
     setVol(nv as number)
   }
   const trackVolChangeEnd = (e: unknown, nv: number | number[]): void => {
-    // api.sendPlaybackTime(nv as number)
+    api.sendSetVolume(nv as number)
+    setTouch(false)
   }
 
+  let trackVol = touched ? tempVol : vol
   return (
     <>
       <IconButton aria-label="volume" aria-describedby={id}
@@ -47,7 +54,7 @@ export const TrackVolume: React.FC = () => {
             min={0}
             max={100}
             step={5}
-            value={tempVol}
+            value={trackVol}
             onChange={trackVolChange as any}
             onChangeCommitted={trackVolChangeEnd}
           />
