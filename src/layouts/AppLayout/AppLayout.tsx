@@ -2,9 +2,10 @@ import React from 'react'
 import {Container, CssBaseline, makeStyles} from '@material-ui/core'
 import {AppBar} from './components/AppBar'
 import {SideMenu} from './components/SideMenu'
+import {TrackDrawer} from './components/TrackDrawer/index'
+import {TrackPanel} from './components/TrackPanel'
 import {AuthCodeDialog} from '../../components/AuthCodeDialog'
 import {api} from 'api'
-import {TrackPanel} from 'components/TrackPanel'
 
 type Props = {
   children: React.ReactNode,
@@ -25,6 +26,7 @@ export const AppLayout: React.FC<Props> = ({children, title}) => {
       </main>
       <div className={c.BottomPanel}>
         <TrackPanel />
+        <TrackDrawer />
       </div>
       <AuthCodeDialog onSaveClick={(code) => api.sendConnect(['_', code])} />
     </div>

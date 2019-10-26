@@ -50,12 +50,20 @@ $ws.watch(sendPlayQueueTrack, (ws, t) => {
   ws && ws.send(toMsg({namespace: 'queue', method: 'playTrack', arguments: [t]}))
 })
 
+const sendPlaybackTime = wsDomain.event<number>()
+$ws.watch(sendPlaybackTime, (ws, time) => {
+  ws && ws.send(toMsg(
+    {namespace: 'playback', method: 'setCurrentTime', arguments: [time]}
+  ))
+})
+
 export const api = {
   sendConnect,
   sendNextTrack,
   sendPrevTrack,
   sendPlay,
-  sendPlayQueueTrack
+  sendPlayQueueTrack,
+  sendPlaybackTime
 }
 
 function sleep(ms: number): Promise<void> {

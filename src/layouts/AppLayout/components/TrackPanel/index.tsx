@@ -12,37 +12,6 @@ import {api} from 'api'
 import {$track} from 'stores/TrackStore/track'
 import {$trackTime} from 'stores/TrackStore/trackTime'
 
-const useStyles = makeStyles(() => ({
-  card: {
-    display: 'flex',
-    position: 'relative',
-    height: '80px',
-    width: '100%',
-    padding: 4
-  },
-  cover: {
-    width: 64
-  },
-  details: {
-    display: 'flex',
-    flexFlow: 'column',
-    justifyContent: 'center',
-    flex: 1,
-    marginLeft: 10
-  },
-  controls: {
-    display: 'flex',
-    alignItems: 'center'
-  },
-  ctrlIcon: {
-    height: 40,
-    width: 40,
-  },
-  trackTitle: {
-    fontWeight: 'bold'
-  }
-}))
-
 export const TrackPanel: React.FC = () => {
   const c = useStyles()
   const track = useStore($track)
@@ -56,8 +25,8 @@ export const TrackPanel: React.FC = () => {
         image={art}
       />
       <div className={c.details}>
-        <Typography className={c.trackTitle}>{track.title || '-'}</Typography>
-        <Typography>{track.artist || '_'}</Typography>
+        <Typography noWrap className={c.trackTitle}>{track.title || '-'}</Typography>
+        <Typography >{track.artist || '_'}</Typography>
       </div>
       <div className={c.controls}>
         <IconButton aria-label="previous" onClick={() => api.sendPrevTrack()}>
@@ -76,3 +45,36 @@ export const TrackPanel: React.FC = () => {
     </Card>
   )
 }
+
+const useStyles = makeStyles(() => ({
+  card: {
+    display: 'flex',
+    position: 'relative',
+    height: '80px',
+    width: '100%',
+    padding: 4
+  },
+  cover: {
+    width: 64
+  },
+  details: {
+    display: 'flex',
+    flexFlow: 'column',
+    justifyContent: 'center',
+    flex: 1,
+    marginLeft: 10,
+    overflow: 'hidden'
+  },
+  controls: {
+    display: 'flex',
+    alignItems: 'center',
+    zIndex: 1200
+  },
+  ctrlIcon: {
+    height: 40,
+    width: 40,
+  },
+  trackTitle: {
+    fontWeight: 'bold',
+  }
+}))

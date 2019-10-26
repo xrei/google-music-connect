@@ -10,6 +10,7 @@ export const SideMenu: React.FC = () => {
       open={useStore($drawer)}
       onClose={() => onClose()}
       onOpen={() => onOpen()}
+      disableBackdropTransition={true}
     >
       <MenuList />
     </SwipeableDrawer>
