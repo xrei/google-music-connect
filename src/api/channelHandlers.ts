@@ -5,8 +5,9 @@ import {showAuthCodeModal} from 'components/AuthCodeDialog/model'
 import {changeTrack} from 'stores/TrackStore/track'
 import {updateTime, setPlaying} from 'stores/TrackStore/trackTime'
 import {updateQueue} from 'stores/Queue'
-import {updateVolume} from 'stores/TrackStore/volume'
+import {updateVolume} from 'stores/Playback'
 import AuthService from 'services/AuthService'
+import {setRepeat} from 'stores/Playback'
 
 export const addHandlers = (): void => {
   const filteredMsg = onMessage.map(({data}) => JSON.parse(data))
@@ -42,4 +43,5 @@ export const addHandlers = (): void => {
 
   channel.volume.watch(({payload}) => updateVolume(payload))
 
+  channel.repeat.watch(({payload}) => setRepeat(payload))
 }

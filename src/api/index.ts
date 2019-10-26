@@ -63,6 +63,12 @@ $ws.watch(sendSetVolume, (ws, vol) => {
     {namespace: 'volume', method: 'setVolume', arguments: [vol]}
   ))
 })
+const sendToggleRepeat = wsDomain.event()
+$ws.watch(sendToggleRepeat, (ws) => {
+  ws && ws.send(toMsg(
+    {namespace: 'playback', method: 'toggleRepeat'}
+  ))
+})
 
 export const api = {
   sendConnect,
@@ -71,7 +77,8 @@ export const api = {
   sendPlay,
   sendPlayQueueTrack,
   sendPlaybackTime,
-  sendSetVolume
+  sendSetVolume,
+  sendToggleRepeat
 }
 
 function sleep(ms: number): Promise<void> {

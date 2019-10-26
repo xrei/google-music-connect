@@ -67,9 +67,11 @@ export type shuffleMessage = {
   payload: string,
 }
 
+export type RepeatVariant = 'NO_REPEAT' | 'LIST_REPEAT' | 'SINGLE_REPEAT'
+
 export type repeatMessage = {
   channel: 'repeat',
-  payload: string,
+  payload: RepeatVariant,
 }
 
 export type searchMessage = {

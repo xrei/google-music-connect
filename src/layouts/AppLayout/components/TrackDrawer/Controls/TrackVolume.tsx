@@ -2,7 +2,7 @@ import React from 'react'
 import {Slider, IconButton, Popover, makeStyles} from '@material-ui/core'
 import {VolumeUp as VolumeIcon} from '@material-ui/icons'
 import {useStore} from 'effector-react'
-import {$volume} from 'stores/TrackStore/volume'
+import {$volume} from 'stores/Playback'
 import {api} from 'api'
 
 export const TrackVolume: React.FC = () => {

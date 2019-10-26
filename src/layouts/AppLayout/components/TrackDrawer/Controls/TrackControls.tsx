@@ -6,27 +6,27 @@ import {
   Pause as PauseIcon,
   SkipPrevious as SkipPreviousIcon,
   SkipNext as SkipNextIcon,
-  Shuffle as ShuffleIcon,
   Repeat as RepeatIcon,
-  RepeatOne as RepeatOneIcon
+  RepeatOne as RepeatOneIcon,
+  ThumbUp as ThumbUpIcon,
+  ThumbUpAlt as ThumbUpAltIcon,
 } from '@material-ui/icons'
 import {useStore} from 'effector-react'
 import {api} from 'api'
 import {$trackTime} from 'stores/TrackStore/trackTime'
 import {TrackVolume} from './TrackVolume'
+import {onToggleRepeat, $repeat} from 'stores/Playback'
 
 export const TrackControls: React.FC = () => {
+  const repeat = useStore($repeat)
   const trackTime = useStore($trackTime)
   const c = useStyles()
 
   return (
     <div className={c.root}>
       <div className={clsx(c.col, c.left)}>
-        <IconButton aria-label="repeat">
-          <RepeatIcon className={c.subIcon} />
-        </IconButton>
-        <IconButton aria-label="shuffle">
-          <ShuffleIcon className={c.subIcon} />
+        <IconButton aria-label="Like">
+          <ThumbUpAltIcon className={c.subIcon} />
         </IconButton>
       </div>
       <div className={c.col}>
@@ -47,6 +47,15 @@ export const TrackControls: React.FC = () => {
         </IconButton>
       </div>
       <div className={clsx(c.col, c.right)}>
+        <IconButton aria-label="repeat" onClick={() => onToggleRepeat()}>
+          { repeat !== 'SINGLE_REPEAT'
+            ? <RepeatIcon
+                color={repeat === 'NO_REPEAT' ? 'inherit' : 'primary'}
+                className={c.subIcon}
+              />
+            : <RepeatOneIcon color="primary" className={c.subIcon} />
+          }
+        </IconButton>
         <TrackVolume />
       </div>
     </div>
