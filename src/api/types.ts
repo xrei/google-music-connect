@@ -76,7 +76,7 @@ export type repeatMessage = {
 
 export type searchMessage = {
   channel: 'search-results',
-  payload: any,
+  payload: [],
 }
 
 export type RatingState = {
