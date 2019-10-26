@@ -4,8 +4,7 @@ import {api} from './'
 import {addHandlers} from './channelHandlers'
 
 export const onMessage = createEvent<MessageEvent>('onMessage')
-addHandlers() // what a dirty hack...
-// because of isolated modules is set to true...
+addHandlers() // dirty hack, or maybe not.
 
 export const onConnOpen = createEvent<Event | void>('onConnOpen')
 onConnOpen.watch((e) => {
