@@ -32,7 +32,7 @@ export const TrackVolume: React.FC = () => {
       <IconButton aria-label="volume" aria-describedby={id}
         onClick={e => setAnchorEl(e.currentTarget)}
       >
-        <VolumeIcon className={c.subIcon} />
+        <VolumeIcon color={open ? "primary" : "inherit"} className={c.subIcon} />
       </IconButton>
       <Popover
         id={id}
