@@ -9,7 +9,8 @@ import {
   libraryMessage,
   queueMessage,
   playlistsMessage,
-  searchMessage
+  searchMessage,
+  RatingMessage
 } from './types'
 
 export const channelComparator = {
@@ -24,4 +25,5 @@ export const channelComparator = {
   shuffle: (p: shuffleMessage): p is shuffleMessage => p.channel === 'shuffle',
   repeat: (p: repeatMessage): p is repeatMessage => p.channel === 'repeat',
   searchResults: (p: searchMessage): p is searchMessage => p.channel === 'search-results',
+  rating: (p: RatingMessage): p is RatingMessage => p.channel === 'rating'
 }

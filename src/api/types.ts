@@ -78,3 +78,12 @@ export type searchMessage = {
   channel: 'search-results',
   payload: any,
 }
+
+export type RatingState = {
+  liked: boolean, disliked: boolean,
+}
+
+export type RatingMessage = {
+  channel: 'rating',
+  payload: RatingState,
+}

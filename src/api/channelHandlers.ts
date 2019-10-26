@@ -8,6 +8,7 @@ import {updateQueue} from 'stores/Queue'
 import {updateVolume} from 'stores/Playback'
 import AuthService from 'services/AuthService'
 import {setRepeat} from 'stores/Playback'
+import {setRating} from 'stores/Rating'
 
 export const addHandlers = (): void => {
   const filteredMsg = onMessage.map(({data}) => JSON.parse(data))
@@ -44,4 +45,6 @@ export const addHandlers = (): void => {
   channel.volume.watch(({payload}) => updateVolume(payload))
 
   channel.repeat.watch(({payload}) => setRepeat(payload))
+
+  channel.rating.watch(({payload}) => setRating(payload))
 }

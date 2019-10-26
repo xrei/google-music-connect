@@ -69,6 +69,18 @@ $ws.watch(sendToggleRepeat, (ws) => {
     {namespace: 'playback', method: 'toggleRepeat'}
   ))
 })
+const sendToggleThumbsUp = wsDomain.event()
+$ws.watch(sendToggleThumbsUp, (ws) => {
+  ws && ws.send(toMsg(
+    {namespace: 'rating', method: 'toggleThumbsUp'}
+  ))
+})
+const sendToggleThumbsDown = wsDomain.event()
+$ws.watch(sendToggleThumbsDown, (ws) => {
+  ws && ws.send(toMsg(
+    {namespace: 'rating', method: 'toggleThumbsDown'}
+  ))
+})
 
 export const api = {
   sendConnect,
@@ -78,7 +90,9 @@ export const api = {
   sendPlayQueueTrack,
   sendPlaybackTime,
   sendSetVolume,
-  sendToggleRepeat
+  sendToggleRepeat,
+  sendToggleThumbsUp,
+  sendToggleThumbsDown,
 }
 
 function sleep(ms: number): Promise<void> {

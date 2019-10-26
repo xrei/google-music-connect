@@ -8,16 +8,20 @@ import {
   SkipNext as SkipNextIcon,
   Repeat as RepeatIcon,
   RepeatOne as RepeatOneIcon,
-  ThumbUp as ThumbUpIcon,
-  ThumbUpAlt as ThumbUpAltIcon,
+  ThumbUpOutlined as ThumbUpIcon,
+  ThumbUp as ThumbUpAltIcon,
+  ThumbDownOutlined as ThumbDownIcon,
+  ThumbDown as ThumbDownAltIcon
 } from '@material-ui/icons'
 import {useStore} from 'effector-react'
 import {api} from 'api'
 import {$trackTime} from 'stores/TrackStore/trackTime'
 import {TrackVolume} from './TrackVolume'
 import {onToggleRepeat, $repeat} from 'stores/Playback'
+import {toggleThumbsUp, toggleThumbsDown, $rating} from 'stores/Rating'
 
 export const TrackControls: React.FC = () => {
+  const rating = useStore($rating)
   const repeat = useStore($repeat)
   const trackTime = useStore($trackTime)
   const c = useStyles()
@@ -25,8 +29,23 @@ export const TrackControls: React.FC = () => {
   return (
     <div className={c.root}>
       <div className={clsx(c.col, c.left)}>
-        <IconButton aria-label="Like">
-          <ThumbUpAltIcon className={c.subIcon} />
+        <IconButton
+          onClick={() => toggleThumbsUp()}
+          aria-label="Like"
+        >
+          { rating.liked
+            ? <ThumbUpAltIcon className={c.subIcon} />
+            : <ThumbUpIcon className={c.subIcon} />
+          }
+        </IconButton>
+        <IconButton
+          onClick={() => toggleThumbsDown()}
+          aria-label="Dislike"
+        >
+          { rating.disliked
+            ? <ThumbDownAltIcon className={c.subIcon} />
+            : <ThumbDownIcon className={c.subIcon} />
+          }
         </IconButton>
       </div>
       <div className={c.col}>
