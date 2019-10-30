@@ -1,5 +1,5 @@
 import {createBrowserHistory} from 'history'
-import {Playlists, Settings} from './views'
+import {Settings} from './views'
 
 export const history = createBrowserHistory()
 
@@ -9,11 +9,11 @@ export default {
     title: 'Library'
   },
   app: {
-    playlists: {
-      path: '/playlists',
-      title: 'Playlists',
-      view: Playlists
-    },
+    // playlists: {
+    //   path: '/playlists',
+    //   title: 'Playlists',
+    //   view: Playlists
+    // },
     settings: {
       path: '/settings',
       title: 'Settings',

@@ -1,7 +1,7 @@
 import React from 'react'
 import {NavLink as Link} from 'react-router-dom'
 import {makeStyles, List, ListItem, ListItemIcon, ListItemText, Divider} from '@material-ui/core'
-import {Home as HomeIcn, LibraryMusic as MusicIcn, Settings as SettingsIcn} from '@material-ui/icons'
+import {LibraryMusic as MusicIcn, Settings as SettingsIcn} from '@material-ui/icons'
 import {toggle as ToggleDrawer} from './SideMenuStore'
 
 const DrawerWidth = 250
@@ -21,18 +21,18 @@ export const MenuList: React.FC = () => {
           exact
           activeClassName={classess.active}
         >
-          <ListItemIcon><HomeIcn /></ListItemIcon>
+          <ListItemIcon><MusicIcn /></ListItemIcon>
           <ListItemText>Library</ListItemText>
         </ListItem>
 
-        <ListItem button
+        {/* <ListItem button
           component={Link} 
           to="/playlists"
           activeClassName={classess.active}
         >
           <ListItemIcon><MusicIcn /></ListItemIcon>
           <ListItemText>Playlists</ListItemText>
-        </ListItem>
+        </ListItem> */}
       </List>
       <Divider />
       <List>
