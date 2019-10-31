@@ -1,4 +1,4 @@
-import {onConnOpen} from './events'
+import {onConnOpen} from '.'
 
 const PORT = '5672'
 const TEST_IP = '192.168.0.24'

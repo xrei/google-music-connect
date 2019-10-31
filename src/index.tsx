@@ -11,6 +11,8 @@ import {Setup} from './views/Setup'
 import PrivateRoute from './components/PrivateRoute'
 import * as serviceWorker from './serviceWorker'
 
+import './init'
+
 ReactDOM.render(
   <StylesProvider injectFirst>
     <ThemeProvider theme={theme}>

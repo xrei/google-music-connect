@@ -39,6 +39,7 @@
   ],
   "rules": {
     "object-curly-spacing": ["error", "never"],
-    "prefer-const": "off"
+    "prefer-const": "off",
+    "@typescript-eslint/no-explicit-any": 0
   }
 }
