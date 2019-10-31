@@ -1,5 +1,5 @@
 // this file contains handlers of recieved messages
-// from websocket api
+// from websocket api channels
 
 import {flow} from 'fp-ts/lib/function'
 import {split} from 'effector'
@@ -14,14 +14,14 @@ import {updateVolume} from 'stores/Playback'
 import {setRepeat} from 'stores/Playback'
 import {setRating} from 'stores/Rating'
 
-const filteredMsg = onMessage.map(({data}) => JSON.parse(data))
+const parsed = onMessage.map(({data}) => JSON.parse(data))
 
-filteredMsg.watch((d) => {
+parsed.watch((d) => {
   if (d.channel === 'time') return
   console.log(d)
 })
 
-const channel = split(filteredMsg, channelComparator)
+const channel = split(parsed, channelComparator)
 
 channel.connect.watch((data) => {
   if (data.payload === 'CODE_REQUIRED') {
