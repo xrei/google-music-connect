@@ -27,6 +27,7 @@ export const TrackSlider: React.FC = () => {
       onChange={trackTimeChange}
       onChangeCommitted={trackTimeChangeEnd}
       aria-labelledby="track-slider"
+      color="secondary"
     />
   )
 }

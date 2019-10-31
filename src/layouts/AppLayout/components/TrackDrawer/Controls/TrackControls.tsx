@@ -109,7 +109,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     width: 28
   },
   ctrlPlayBtn: {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.secondary.main,
     color: theme.palette.getContrastText(theme.palette.primary.main),
     '&:hover': {
       backgroundColor: theme.palette.primary.main,

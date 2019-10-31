@@ -6,6 +6,31 @@ import {
   Switch,
   makeStyles
 } from '@material-ui/core'
+import {toggleTheme} from 'stores/Theme'
+
+export const ThemeSettings: React.FC = () => {
+  const cls = styles()
+  const [isDark, setTheme] = React.useState(false)
+
+  const onToggleTheme = (): void => {
+    toggleTheme()
+    setTheme(!isDark)
+  }
+
+  return (
+    <Paper className={cls.paper} square>
+      <Typography className={cls.title} component="h2" gutterBottom color="secondary">Application theme</Typography>
+      <FormControlLabel
+        className={cls.formControl}
+        control={
+          <Switch checked={isDark} onChange={onToggleTheme} value="isDark" />
+        }
+        labelPlacement="start"
+        label="Enable dark theme"
+      />
+    </Paper>
+  )
+}
 
 const styles = makeStyles({
   formControl: {
@@ -20,22 +45,3 @@ const styles = makeStyles({
     fontWeight: 500
   }
 })
-
-export const ThemeSettings: React.FC = () => {
-  const cls = styles()
-  const [isDark, setTheme] = React.useState(false)
-
-  return (
-    <Paper className={cls.paper} square>
-      <Typography className={cls.title} component="h2" gutterBottom color="secondary">Application theme</Typography>
-      <FormControlLabel
-        className={cls.formControl}
-        control={
-          <Switch checked={isDark} onChange={() => setTheme(!isDark)} value="isDark" />
-        }
-        labelPlacement="start"
-        label="Enable dark theme"
-      />
-    </Paper>
-  )
-}

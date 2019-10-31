@@ -15,7 +15,7 @@ export const AppBar: React.FC<Props> = ({title}) => {
   return (
     <div>
       <HideOnScroll>
-      <MuiAppBar className={classes.grow} elevation={0}>
+      <MuiAppBar className={classes.grow} elevation={0} color="primary">
         <Toolbar>
           <IconButton
             edge="start"

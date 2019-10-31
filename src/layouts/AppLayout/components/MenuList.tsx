@@ -1,6 +1,6 @@
 import React from 'react'
 import {NavLink as Link} from 'react-router-dom'
-import {makeStyles, List, ListItem, ListItemIcon, ListItemText, Divider} from '@material-ui/core'
+import {makeStyles, List, ListItem, ListItemIcon, ListItemText, Divider, Theme} from '@material-ui/core'
 import {LibraryMusic as MusicIcn, Settings as SettingsIcn} from '@material-ui/icons'
 import {toggle as ToggleDrawer} from './SideMenuStore'
 
@@ -49,11 +49,11 @@ export const MenuList: React.FC = () => {
   )
 }
 
-const styles = makeStyles({
+const styles = makeStyles((t: Theme) => ({
   list: {
     width: DrawerWidth
   },
   active: {
-    color: '#ff0557'
+    color: t.palette.secondary.main
   }
-})
+}))

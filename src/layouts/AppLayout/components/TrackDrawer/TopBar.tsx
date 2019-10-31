@@ -3,7 +3,8 @@ import {
   makeStyles,
   Card,
   CardMedia,
-  Typography
+  Typography,
+  Theme
 } from '@material-ui/core'
 import {$track} from 'stores/Track/track'
 import {useStore} from 'effector-react'
@@ -25,15 +26,17 @@ export const TopBar: React.FC = (props) => {
     </Card>
   )
 }
+let background = (t: Theme): string =>
+  t.palette.type === 'light' ? '#ffffffef' : t.palette.primary.dark
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((t: Theme) => ({
   card: {
     display: 'flex',
     position: 'relative',
     height: '64px',
     width: '100%',
     padding: 4,
-    backgroundColor: '#ffffffef',
+    backgroundColor: background(t),
     zIndex: 1300
   },
   cover: {
