@@ -6,16 +6,18 @@ import {
   Switch,
   makeStyles
 } from '@material-ui/core'
-import {toggleTheme} from 'stores/Theme'
+import {toggleTheme, $theme} from 'stores/Theme'
+import {useStore} from 'effector-react'
 
 export const ThemeSettings: React.FC = () => {
   const cls = styles()
-  const [isDark, setTheme] = React.useState(false)
+  const theme = useStore($theme)
 
   const onToggleTheme = (): void => {
     toggleTheme()
-    setTheme(!isDark)
   }
+
+  const isDark = theme === 'Dark'
 
   return (
     <Paper className={cls.paper} square>
