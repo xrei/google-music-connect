@@ -1,7 +1,6 @@
 // this file contains handlers of recieved messages
 // from websocket api channels
 
-import {flow} from 'fp-ts/lib/function'
 import {split} from 'effector'
 import {onMessage, onConnOpen} from '.'
 import {channelComparator} from './comparator'
@@ -13,6 +12,7 @@ import {updateQueue} from 'stores/Queue'
 import {updateVolume} from 'stores/Playback'
 import {setRepeat} from 'stores/Playback'
 import {setRating} from 'stores/Rating'
+import {RecievedMessage} from './types'
 
 const parsed = onMessage.map(({data}) => JSON.parse(data))
 
@@ -32,12 +32,12 @@ channel.connect.watch((data) => {
   }
 })
 
-let prop = <T extends Record<K, any>, K extends string>(p: K) => (obj: T) => obj[p] 
-let apply = <A, B>(f: (a: A) => B) => (x: A): B => f(x)
+// let prop = <T extends Record<K, any>, K extends string>(p: K) => (obj: T) => obj[p] 
 
-let handler = (f: any) => flow(prop('payload'), apply(f))
+// let takePayloadAndApply = <A>(f: (x: RecievedMessage['payload']) => A) =>
+//   (x: RecievedMessage) => f(x.payload)
 
-channel.track.watch(handler(changeTrack))
+channel.track.watch(({payload}) => changeTrack(payload))
 channel.time.watch(({payload}) => updateTime(payload))
 channel.playState.watch(({payload}) => setPlaying(payload))
 channel.queue.watch(({payload}) => updateQueue(payload))

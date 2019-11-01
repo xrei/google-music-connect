@@ -1,25 +1,17 @@
 import {trackDomain} from '.'
+import {trackMessage} from 'api/types'
 
-export type Track = {
-  title: string | null,
-  artist: string | null,
-  album: string | null,
-  albumArt: string | null,
-}
+export type Track = trackMessage['payload']
 
 const defaultState: Track = {
-  title: null,
-  artist: null,
-  album: null,
-  albumArt: null
+  title: '',
+  artist: '',
+  album: '',
+  albumArt: ''
 }
 
 export const $track = trackDomain.store(defaultState)
 
-const changeTrack = trackDomain.event<Track>()
+export const changeTrack = trackDomain.event<Track>()
 
 $track.on(changeTrack, (_, track) => track)
-
-export {
-  changeTrack
-}

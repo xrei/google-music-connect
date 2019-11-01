@@ -87,3 +87,17 @@ export type RatingMessage = {
   channel: 'rating',
   payload: RatingState,
 }
+
+export type RecievedMessage =
+  | connectMessage
+  | playStateMessage
+  | trackMessage
+  | timeMessage
+  | volumeMessage
+  | queueMessage
+  | playlistsMessage
+  | libraryMessage
+  | shuffleMessage
+  | repeatMessage
+  | searchMessage
+  | RatingMessage
