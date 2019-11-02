@@ -7,8 +7,6 @@ export const $theme = createStore<ThemeVariant>(Cookies.get('Theme') as ThemeVar
 export const toggleTheme = createEvent<void>()
 export const setTheme = createEvent<ThemeVariant>()
 
-setTheme.watch(console.log)
-
 $theme.on(toggleTheme, (s) => s === 'Light' ? 'Dark' : 'Light')
 $theme.on(setTheme, (_, v) => v)
 

@@ -12,7 +12,6 @@ import {updateQueue} from 'stores/Queue'
 import {updateVolume} from 'stores/Playback'
 import {setRepeat} from 'stores/Playback'
 import {setRating} from 'stores/Rating'
-import {RecievedMessage} from './types'
 
 const parsed = onMessage.map(({data}) => JSON.parse(data))
 
@@ -31,11 +30,6 @@ channel.connect.watch((data) => {
       .then(() => onConnOpen())
   }
 })
-
-// let prop = <T extends Record<K, any>, K extends string>(p: K) => (obj: T) => obj[p] 
-
-// let takePayloadAndApply = <A>(f: (x: RecievedMessage['payload']) => A) =>
-//   (x: RecievedMessage) => f(x.payload)
 
 channel.track.watch(({payload}) => changeTrack(payload))
 channel.time.watch(({payload}) => updateTime(payload))
