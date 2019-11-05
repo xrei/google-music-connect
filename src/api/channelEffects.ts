@@ -12,8 +12,9 @@ import {updateQueue} from 'stores/Queue'
 import {updateVolume} from 'stores/Playback'
 import {setRepeat} from 'stores/Playback'
 import {setRating} from 'stores/Rating'
+// import {RecievedMessage} from './types'
 
-const parsed = onMessage.map(({data}) => JSON.parse(data))
+const parsed = onMessage.map((p: MessageEvent) => JSON.parse(p.data))
 
 parsed.watch((d) => {
   if (d.channel === 'time') return
