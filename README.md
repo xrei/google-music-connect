@@ -9,6 +9,7 @@ This app allows you to remote control the music on any device which has [Google 
 To run the project do the following commands
 
 ```bash
+  $ yarn
   $ yarn build
   $ npx serve -s build 
 ```
