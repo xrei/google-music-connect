@@ -19,7 +19,6 @@ export const App: React.FC<RouteComponentProps> = ({location}) => {
   }, [])
 
   const theme = createMuiTheme(themeOpts[themeVariant])
-  console.log(theme)
 
   return (
     <ThemeProvider theme={theme}>
