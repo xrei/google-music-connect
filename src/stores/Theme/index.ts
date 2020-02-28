@@ -3,7 +3,9 @@ import Cookies from 'js-cookie'
 
 type ThemeVariant = 'Light' | 'Dark'
 
-export const $theme = createStore<ThemeVariant>(Cookies.get('Theme') as ThemeVariant)
+const themeCookie = (): ThemeVariant => Cookies.get('Theme') as ThemeVariant || 'Dark'
+
+export const $theme = createStore<ThemeVariant>(themeCookie())
 export const toggleTheme = createEvent<void>()
 export const setTheme = createEvent<ThemeVariant>()
 
